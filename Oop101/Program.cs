@@ -7,12 +7,13 @@ try
 {
     var kisi1 = new Kisi
     {
-        Ad = "123132132",
-        Soyad = "Fıdıl"
+        Ad = "Kamil",
+        Soyad = "Fıdıl",
+        DogumTarihi = new DateTime(2000,1,1)
     };
+    Console.WriteLine($"Yaş: {kisi1.Yas}");
 }
 catch (Exception ex)
 {
     Console.WriteLine(ex.Message);
-    
 }

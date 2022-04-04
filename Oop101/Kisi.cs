@@ -9,12 +9,16 @@
          * public; referans verilen tüm projelerden erişilebilir
          * protected; sadece kalıtım içerisinden erişilebilir
          * protected internal; sadece kalıtımdan ve aynı namespace(proje) den erişilebilir
+         *
+         * Default Access Modifiers
+         * Class interface enum gibi nesneler internal
+         * Field, prop., degisken, method vs bunlar da private
          */
         
-
         private string _ad; //field
         private string _soyad;
-        private DateTime _dogumTarihi;
+        private DateTime _dogumTarihi; //kimse tarafından kullanılmıyor
+        private int _a = 10;
 
         public string Ad //full-property
         {
@@ -26,6 +30,8 @@
                     if (char.IsDigit(harf))
                         throw new Exception("Adınızda rakam bulunamaz");
                 }
+
+                _a = 20;
                 _ad = value;
             }
         }
@@ -37,6 +43,6 @@
 
         public DateTime DogumTarihi { get; set; } //auto-property
 
-        public int Yas => DateTime.Now.Year - _dogumTarihi.Year; // read-only property
+        public int Yas => DateTime.Now.Year - DogumTarihi.Year; // read-only property
     }
 }
