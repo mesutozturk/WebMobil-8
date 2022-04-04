@@ -1,6 +1,6 @@
 ﻿namespace Oop101
 {
-    public class Kisi 
+    public class Kisi
     {
         //Access Modifiers
         /*
@@ -14,11 +14,20 @@
          * Class interface enum gibi nesneler internal
          * Field, prop., degisken, method vs bunlar da private
          */
-        
+
         private string _ad; //field
         private string _soyad;
         private DateTime _dogumTarihi; //kimse tarafından kullanılmıyor
         private int _a = 10;
+        private readonly DateTime _olusturulmaZamani;
+
+        //constructor
+
+        public Kisi() // class oluşturulurken çalışacak method
+        {
+            _olusturulmaZamani = DateTime.Now;
+            OlusturmaZamani = _olusturulmaZamani;
+        }
 
         public string Ad //full-property
         {
@@ -40,9 +49,8 @@
             get => _soyad;
             set => _soyad = value;
         }
-
         public DateTime DogumTarihi { get; set; } //auto-property
-
         public int Yas => DateTime.Now.Year - DogumTarihi.Year; // read-only property
+        public DateTime OlusturmaZamani { get; }
     }
 }
