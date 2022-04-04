@@ -14,7 +14,7 @@
          * Class interface enum gibi nesneler internal
          * Field, prop., degisken, method vs bunlar da private
          */
-
+        
         private string _ad; //field
         private string _soyad;
         private DateTime _dogumTarihi; //kimse tarafından kullanılmıyor
@@ -28,6 +28,20 @@
             _olusturulmaZamani = DateTime.Now;
             OlusturmaZamani = _olusturulmaZamani;
         }
+
+        public Kisi(string ad, string soyad)
+        {
+            this.Ad = ad;
+            this.Soyad = soyad;
+        }
+
+        protected int _korumali = 10;
+
+        public int Korumali
+        {
+            get => _korumali;
+            protected set => _korumali = value;
+        } 
 
         public string Ad //full-property
         {
