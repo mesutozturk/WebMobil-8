@@ -23,7 +23,7 @@ try
     //kisi3.Korumali = 30;
     Console.WriteLine();
 
-    var ogrenci1 = new Ogrenci()
+    Kisi ogrenci1 = new Ogrenci()
     {
         Ad = "Ahmet",
         Soyad = "Fıdıl",
@@ -32,8 +32,9 @@ try
         Ortalama = 4,
         Sinif = "10/F"
     };
+    
 
-    var ogretmen1 = new Ogretmen()
+    Kisi ogretmen1 = new Ogretmen()
     {
         Ad = "Hakkı",
         Soyad = "Fıdıl",
