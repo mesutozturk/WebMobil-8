@@ -1,9 +1,16 @@
 ﻿namespace Oop101.Polymorphism.Models
 {
-    public class Sekil
+    public abstract class Sekil
     {
         public double X { get; set; }
 
-        public double AlanHesapla() => X * X;
+        public virtual double AlanHesapla() => X * X;
+
+        public abstract double CevreHesapla();
+    }
+
+    public abstract class UcBoyutluSekil : Sekil
+    {
+
     }
 }
