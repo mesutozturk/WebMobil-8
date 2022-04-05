@@ -70,7 +70,6 @@ foreach (Sekil item in sekiller)
  * TCKN validasyonu
  * telefon validasyonu
  * ad soyad email validasyonu
- *
  * 
  *
  * Müşteri - bakiye validasyonu 
