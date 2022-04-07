@@ -1,3 +1,4 @@
+using Mvc101.Services.EmailService;
 using Mvc101.Services.SmsService;
 using SendGrid.Extensions.DependencyInjection;
 
@@ -9,6 +10,7 @@ builder.Services.AddSendGrid(options =>
 {
     options.ApiKey = "12345";
 });
+builder.Services.AddScoped<IEmailService, SendGridEmailService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
