@@ -7,7 +7,7 @@ namespace Mvc101.Services.SmsService
     {
         public SmsStates Send(SmsModel model)
         {
-            Debug.Write($"Sonic: {model.TelefonNo} - {model.Mesaj}");
+            Debug.WriteLine($"Sonic: {model.TelefonNo} - {model.Mesaj}");
             return SmsStates.Sent;
         }
     }
