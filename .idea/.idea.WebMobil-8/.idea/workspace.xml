@@ -12,7 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="fluent api">
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="identity IoC">
+      <change afterPath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Identity101/ViewModels/RegisterViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Identity101/Identity101.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Identity101.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Identity101/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +26,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f9f4a6e397c5c75e68ea537cd976330f065729cdc73b6947c36a87c372cb251/IdentityRole.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mesutozturk/Sources/WebMobil-8/Identity101/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/201163a2476615e8e92ea1f40cf5c4f545e20ffc550117de25937deb4102086/MvcServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/93bf8ca51564b3532dce6442f8ec6d3856e11622b484427b6e965ca60aba4b1/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a4ed796081acfa4cefed1c41947519a48feaf6375183bfb6abe1618b88241/SqlServerDbContextOptionsBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
@@ -159,7 +164,7 @@
       <updated>1649658131785</updated>
       <workItem from="1649658136659" duration="1926000" />
       <workItem from="1649660374669" duration="923000" />
-      <workItem from="1649661316834" duration="7507000" />
+      <workItem from="1649661316834" duration="8722000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -196,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649673357382</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="identity IoC">
+      <created>1649673745401</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1649673745401</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,6 +236,7 @@
     <MESSAGE value="Identity ok" />
     <MESSAGE value="." />
     <MESSAGE value="fluent api" />
-    <option name="LAST_COMMIT_MESSAGE" value="fluent api" />
+    <MESSAGE value="identity IoC" />
+    <option name="LAST_COMMIT_MESSAGE" value="identity IoC" />
   </component>
 </project>
