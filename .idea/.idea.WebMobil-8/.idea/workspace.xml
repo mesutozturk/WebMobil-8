@@ -12,13 +12,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment=".">
-      <change afterPath="$PROJECT_DIR$/Identity101/Migrations/20220411102933_Fluent1.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Identity101/Migrations/20220411102933_Fluent1.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity101/Data/MyContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Data/MyContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity101/Migrations/MyContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Migrations/MyContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity101/Models/Identity/ApplicationRole.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Models/Identity/ApplicationRole.cs" afterDir="false" />
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="fluent api">
+      <change beforePath="$PROJECT_DIR$/Identity101/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +159,7 @@
       <updated>1649658131785</updated>
       <workItem from="1649658136659" duration="1926000" />
       <workItem from="1649660374669" duration="923000" />
-      <workItem from="1649661316834" duration="7116000" />
+      <workItem from="1649661316834" duration="7507000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -194,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649668054259</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fluent api">
+      <created>1649673357382</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1649673357382</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,6 +223,7 @@
     <MESSAGE value="identity giriş" />
     <MESSAGE value="Identity ok" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="fluent api" />
+    <option name="LAST_COMMIT_MESSAGE" value="fluent api" />
   </component>
 </project>
