@@ -21,7 +21,7 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register(RegisterViewModel model, UserManager<ApplicationUser> _userManager)
+    public async Task<IActionResult> Register(RegisterViewModel model)
     {
         if (!ModelState.IsValid)
         {
