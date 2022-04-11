@@ -1,3 +1,5 @@
+
+
 using Identity101.Models.Identity;
 using Identity101.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -14,13 +16,13 @@ public class AccountController : Controller
         _userManager = userManager;
     }
 
-    [HttpGet]
+    [HttpGet("~/kayit-ol")]
     public IActionResult Register()
     {
         return View();
     }
 
-    [HttpPost]
+    [HttpPost("~/kayit-ol")]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {
         if (!ModelState.IsValid)
@@ -47,5 +49,9 @@ public class AccountController : Controller
         var messages = string.Join("\n", result.Errors.Select(x => x.Description));
         ModelState.AddModelError(string.Empty, messages);
         return View(model);
+    }
+    public IActionResult Login()
+    {
+        return View();
     }
 }

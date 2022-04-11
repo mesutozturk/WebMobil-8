@@ -12,11 +12,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="identity IoC" />
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="identity IoC">
+      <change afterPath="$PROJECT_DIR$/Identity101/Views/Account/Register.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Identity101/Views/_ViewImports.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Identity101/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Program.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f9f4a6e397c5c75e68ea537cd976330f065729cdc73b6947c36a87c372cb251/IdentityRole.cs" root0="SKIP_HIGHLIGHTING" />
@@ -50,7 +64,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Mvc101">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Identity101">
     <configuration name="Oop101" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -158,7 +172,7 @@
       <updated>1649658131785</updated>
       <workItem from="1649658136659" duration="1926000" />
       <workItem from="1649660374669" duration="923000" />
-      <workItem from="1649661316834" duration="9549000" />
+      <workItem from="1649661316834" duration="11009000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -232,5 +246,24 @@
     <MESSAGE value="fluent api" />
     <MESSAGE value="identity IoC" />
     <option name="LAST_COMMIT_MESSAGE" value="identity IoC" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Identity101/Controllers/AccountController.cs</url>
+          <line>26</line>
+          <properties documentPath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" initialLine="26" containingFunctionPresentation="method 'Register'">
+            <startOffsets>
+              <option value="608" />
+            </startOffsets>
+            <endOffsets>
+              <option value="609" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
