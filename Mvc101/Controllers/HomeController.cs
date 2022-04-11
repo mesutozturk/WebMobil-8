@@ -41,7 +41,6 @@ namespace Mvc101.Controllers
             if (id % 2 == 0)
             {
                 emailService = _serviceProvider.GetService<SendGridEmailService>();
-
             }
             else
             {
