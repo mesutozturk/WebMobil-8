@@ -49,7 +49,6 @@ namespace Mvc101.Controllers
 
             #endregion
             
-
             //var fileStream = new FileStream(@$"{_appEnvironment.WebRootPath}\files\portre.jpeg", FileMode.Open);
 
             emailService.SendMailAsync(new MailModel()
@@ -71,6 +70,10 @@ namespace Mvc101.Controllers
             });
             //fileStream.Close();
 
+            List<MailModel> model = new List<MailModel>();
+            Func<MailModel, string> exp = x => x.Body.ToUpper();
+            
+            var upper = model.Select(exp);
             return View();
         }
 
