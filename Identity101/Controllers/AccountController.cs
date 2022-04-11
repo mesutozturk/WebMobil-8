@@ -20,11 +20,6 @@ public class AccountController : Controller
         return View();
     }
 
-    public UserManager<ApplicationUser> Get_userManager()
-    {
-        return _userManager;
-    }
-
     [HttpPost]
     public async Task<IActionResult> Register(RegisterViewModel model, UserManager<ApplicationUser> _userManager)
     {
