@@ -1,4 +1,5 @@
 using Identity101.Models.Identity;
+using Identity101.Models.Role;
 using Identity101.Services.Email;
 using Identity101.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -10,11 +11,30 @@ public class AccountController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IEmailService _emailService;
-    public AccountController(UserManager<ApplicationUser> userManager, IEmailService emailService)
+    private readonly RoleManager<ApplicationRole> _roleManager;
+
+    public AccountController(UserManager<ApplicationUser> userManager, IEmailService emailService,
+        RoleManager<ApplicationRole> roleManager)
     {
         _userManager = userManager;
         _emailService = emailService;
+        _roleManager = roleManager;
+        CheckRoles();
     }
+
+    private void CheckRoles()
+    {
+        foreach (var item in Roles.RoleList)
+        {
+            if (_roleManager.RoleExistsAsync(item).Result)
+                continue;
+            var result = _roleManager.CreateAsync(new ApplicationRole()
+            {
+                Name = item
+            }).Result;
+        }
+    }
+
 
     [HttpGet("~/kayit-ol")]
     public IActionResult Register()
@@ -46,10 +66,12 @@ public class AccountController : Controller
             //TODO: Login olma
             return RedirectToAction("Login");
         }
+
         var messages = string.Join("\n", result.Errors.Select(x => x.Description));
         ModelState.AddModelError(string.Empty, messages);
         return View(model);
     }
+
     public IActionResult Login()
     {
         return View();
