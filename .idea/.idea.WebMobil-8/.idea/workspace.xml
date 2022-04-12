@@ -12,9 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="aspnet roles">
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="üyelik aktivasyon">
+      <change afterPath="$PROJECT_DIR$/Identity101/Views/Account/ConfirmEmail.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Identity101/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +173,7 @@
       <workItem from="1649658136659" duration="1926000" />
       <workItem from="1649660374669" duration="923000" />
       <workItem from="1649661316834" duration="12114000" />
-      <workItem from="1649743723906" duration="5819000" />
+      <workItem from="1649743723906" duration="7992000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -236,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649747639215</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="üyelik aktivasyon">
+      <created>1649751967433</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1649751967433</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +277,26 @@
     <MESSAGE value="register ok" />
     <MESSAGE value="Email service ok" />
     <MESSAGE value="aspnet roles" />
-    <option name="LAST_COMMIT_MESSAGE" value="aspnet roles" />
+    <MESSAGE value="üyelik aktivasyon" />
+    <option name="LAST_COMMIT_MESSAGE" value="üyelik aktivasyon" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Identity101/Controllers/AccountController.cs</url>
+          <line>90</line>
+          <properties documentPath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" initialLine="90" containingFunctionPresentation="method 'Register'">
+            <startOffsets>
+              <option value="2890" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2931" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
