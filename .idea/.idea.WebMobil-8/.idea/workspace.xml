@@ -12,10 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="login &amp; auth">
-      <change afterPath="$PROJECT_DIR$/Identity101/Controllers/AdminController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Identity101/Views/Admin/Index.cshtml" afterDir="false" />
-    </list>
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="Admin auth" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -176,7 +173,7 @@
       <workItem from="1649658136659" duration="1926000" />
       <workItem from="1649660374669" duration="923000" />
       <workItem from="1649661316834" duration="12114000" />
-      <workItem from="1649743723906" duration="13203000" />
+      <workItem from="1649743723906" duration="13534000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -269,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649763473564</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Admin auth">
+      <created>1649764080538</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1649764080538</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,6 +309,7 @@
     <MESSAGE value="confirm email" />
     <MESSAGE value="login" />
     <MESSAGE value="login &amp; auth" />
-    <option name="LAST_COMMIT_MESSAGE" value="login &amp; auth" />
+    <MESSAGE value="Admin auth" />
+    <option name="LAST_COMMIT_MESSAGE" value="Admin auth" />
   </component>
 </project>
