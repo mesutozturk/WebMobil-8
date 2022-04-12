@@ -1,6 +1,5 @@
-
-
 using Identity101.Models.Identity;
+using Identity101.Services.Email;
 using Identity101.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +9,11 @@ namespace Identity101.Controllers;
 public class AccountController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
-
-    public AccountController(UserManager<ApplicationUser> userManager)
+    private readonly IEmailService _emailService;
+    public AccountController(UserManager<ApplicationUser> userManager, IEmailService emailService)
     {
         _userManager = userManager;
+        _emailService = emailService;
     }
 
     [HttpGet("~/kayit-ol")]
