@@ -12,12 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="üyelik aktivasyon">
-      <change afterPath="$PROJECT_DIR$/Identity101/Views/Account/ConfirmEmail.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity101/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/appsettings.json" afterDir="false" />
-    </list>
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="confirm email" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +31,7 @@
     <setting file="mock:///Users/mesutozturk/Sources/WebMobil-8/Identity101/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/201163a2476615e8e92ea1f40cf5c4f545e20ffc550117de25937deb4102086/MvcServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/93bf8ca51564b3532dce6442f8ec6d3856e11622b484427b6e965ca60aba4b1/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mesutozturk/Sources/WebMobil-8/Identity101/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a4ed796081acfa4cefed1c41947519a48feaf6375183bfb6abe1618b88241/SqlServerDbContextOptionsBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/44cad551704bc7dae78cc7717b8b9f9313582aa8e67a6585a69de0cc33b4b8/IServiceCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1c497f459aa592aa6ac4d4767577dbc4634916341dc724c8c0158bb02c2cb9/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
@@ -173,7 +169,7 @@
       <workItem from="1649658136659" duration="1926000" />
       <workItem from="1649660374669" duration="923000" />
       <workItem from="1649661316834" duration="12114000" />
-      <workItem from="1649743723906" duration="7992000" />
+      <workItem from="1649743723906" duration="8361000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -245,7 +241,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649751967433</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="confirm email">
+      <created>1649753744725</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1649753744725</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,25 +281,7 @@
     <MESSAGE value="Email service ok" />
     <MESSAGE value="aspnet roles" />
     <MESSAGE value="üyelik aktivasyon" />
-    <option name="LAST_COMMIT_MESSAGE" value="üyelik aktivasyon" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Identity101/Controllers/AccountController.cs</url>
-          <line>90</line>
-          <properties documentPath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" initialLine="90" containingFunctionPresentation="method 'Register'">
-            <startOffsets>
-              <option value="2890" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2931" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="confirm email" />
+    <option name="LAST_COMMIT_MESSAGE" value="confirm email" />
   </component>
 </project>

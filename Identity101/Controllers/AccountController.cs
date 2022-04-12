@@ -7,6 +7,7 @@ using Identity101.Services.Email;
 using Identity101.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.WebUtilities;
 
 namespace Identity101.Controllers;
@@ -16,13 +17,17 @@ public class AccountController : Controller
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IEmailService _emailService;
     private readonly RoleManager<ApplicationRole> _roleManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public AccountController(UserManager<ApplicationUser> userManager, IEmailService emailService,
-        RoleManager<ApplicationRole> roleManager)
+    public AccountController(UserManager<ApplicationUser> userManager,
+        IEmailService emailService,
+        RoleManager<ApplicationRole> roleManager,
+        SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
         _emailService = emailService;
         _roleManager = roleManager;
+        _signInManager = signInManager;
         CheckRoles();
     }
 
@@ -125,8 +130,37 @@ public class AccountController : Controller
         return View();
     }
 
+    [HttpGet]
     public IActionResult Login()
     {
         return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        var user = await _userManager.FindByNameAsync(model.UserName);
+
+        var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, true);
+
+        if (result.Succeeded)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        else if (result.IsLockedOut)
+        {
+            //TODO: Kilitlenmişse ne yapılacağı
+        }
+        else if (result.RequiresTwoFactor)
+        {
+            //TODO: 2fa yönlendirmesi yapılacak
+        }
+        ModelState.AddModelError(string.Empty, "Kullanıcı adı veya şifre hatalı");
+        return View(model);
     }
 }
