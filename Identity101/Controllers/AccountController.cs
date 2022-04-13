@@ -199,7 +199,7 @@ public class AccountController : Controller
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var callbackUrl = Url.Action("ConfirmResetPassword", "Account", new { userId = user.Id, code = code },
                 protocol: Request.Scheme);
-            
+
             var emailMessage = new MailModel()
             {
                 To = new List<EmailModel>
@@ -219,6 +219,7 @@ public class AccountController : Controller
 
         return View();
     }
+
     public IActionResult ConfirmResetPassword(string userId, string code)
     {
         if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(code))
@@ -230,6 +231,7 @@ public class AccountController : Controller
         ViewBag.UserId = userId;
         return View();
     }
+
     [HttpPost]
     public async Task<IActionResult> ConfirmResetPassword(ResetPasswordViewModel model)
     {
@@ -245,6 +247,7 @@ public class AccountController : Controller
             ModelState.AddModelError(string.Empty, "Kullanıcı bulunamadı");
             return View();
         }
+
         var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(model.Code));
         var result = await _userManager.ResetPasswordAsync(user, code, model.NewPassword);
 
@@ -258,5 +261,44 @@ public class AccountController : Controller
         var message = string.Join("<br>", result.Errors.Select(x => x.Description));
         TempData["Message"] = message;
         return View();
+    }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> Profile()
+    {
+        var user = await _userManager.FindByNameAsync(HttpContext.User.Identity!.Name);
+
+        var model = new UserProfileViewModel()
+        {
+            Email = user.Email,
+            Name = user.Name,
+            Surname = user.Surname
+        };
+        return View(model);
+    }
+
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> Profile(UserProfileViewModel model)
+    {
+        var user = await _userManager.FindByNameAsync(HttpContext.User.Identity!.Name);
+
+        user.Name = model.Name;
+        user.Surname = model.Surname;
+        user.Email = model.Email;
+
+        var result = await _userManager.UpdateAsync(user);
+        if (result.Succeeded)
+        {
+            ViewBag.Message = "Güncelleme başarılı";
+        }
+        else
+        {
+            var message = string.Join("<br>", result.Errors.Select(x => x.Description));
+            ViewBag.Message = message;
+        }
+
+        return View(model);
     }
 }

@@ -12,7 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="password update ok">
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment=".">
+      <change afterPath="$PROJECT_DIR$/Identity101/ViewModels/UserProfileViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Identity101/Views/Account/Profile.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +35,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f9f4a6e397c5c75e68ea537cd976330f065729cdc73b6947c36a87c372cb251/IdentityRole.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mesutozturk/Sources/WebMobil-8/Identity101/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/201163a2476615e8e92ea1f40cf5c4f545e20ffc550117de25937deb4102086/MvcServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mesutozturk/Sources/WebMobil-8/Identity101/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/93bf8ca51564b3532dce6442f8ec6d3856e11622b484427b6e965ca60aba4b1/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a4ed796081acfa4cefed1c41947519a48feaf6375183bfb6abe1618b88241/SqlServerDbContextOptionsBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cd694f3ef012e6a1f1d7431ad209b6ebbef29bf93b045b2fa9638b09858ab3/IdentityBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
@@ -171,7 +175,7 @@
       <workItem from="1649660374669" duration="923000" />
       <workItem from="1649661316834" duration="12114000" />
       <workItem from="1649743723906" duration="13534000" />
-      <workItem from="1649832364873" duration="5745000" />
+      <workItem from="1649832364873" duration="8671000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -285,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649839196532</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary=".">
+      <created>1649840723169</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1649840723169</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,7 +322,6 @@
     <MESSAGE value="rider" />
     <MESSAGE value="identity giriş" />
     <MESSAGE value="Identity ok" />
-    <MESSAGE value="." />
     <MESSAGE value="fluent api" />
     <MESSAGE value="identity IoC" />
     <MESSAGE value="register ok" />
@@ -324,6 +334,7 @@
     <MESSAGE value="Admin auth" />
     <MESSAGE value="reset password1" />
     <MESSAGE value="password update ok" />
-    <option name="LAST_COMMIT_MESSAGE" value="password update ok" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
 </project>
