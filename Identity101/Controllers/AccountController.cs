@@ -254,11 +254,9 @@ public class AccountController : Controller
             TempData["Message"] = "Şifre değişikliğiniz gerçekleştirilmiştir";
             return View();
         }
-        else
-        {
-            var message = string.Join("<br>", result.Errors.Select(x => x.Description));
-            TempData["Message"] = message;
-            return View();
-        }
+
+        var message = string.Join("<br>", result.Errors.Select(x => x.Description));
+        TempData["Message"] = message;
+        return View();
     }
 }
