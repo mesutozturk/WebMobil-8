@@ -12,14 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="Admin auth">
-      <change afterPath="$PROJECT_DIR$/Identity101/Views/Account/ResetPassword.cshtml" afterDir="false" />
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="reset password1">
+      <change afterPath="$PROJECT_DIR$/Identity101/ViewModels/ResetPasswordViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Identity101/Views/Account/ConfirmResetPassword.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity101/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity101/Services/Email/OutlookEmailService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Services/Email/SmtpEmailService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity101/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Views/Home/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity101/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +33,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f9f4a6e397c5c75e68ea537cd976330f065729cdc73b6947c36a87c372cb251/IdentityRole.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mesutozturk/Sources/WebMobil-8/Identity101/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/201163a2476615e8e92ea1f40cf5c4f545e20ffc550117de25937deb4102086/MvcServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/93bf8ca51564b3532dce6442f8ec6d3856e11622b484427b6e965ca60aba4b1/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a4ed796081acfa4cefed1c41947519a48feaf6375183bfb6abe1618b88241/SqlServerDbContextOptionsBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
@@ -176,7 +174,7 @@
       <workItem from="1649660374669" duration="923000" />
       <workItem from="1649661316834" duration="12114000" />
       <workItem from="1649743723906" duration="13534000" />
-      <workItem from="1649832364873" duration="2729000" />
+      <workItem from="1649832364873" duration="4400000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -276,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649764080538</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="reset password1">
+      <created>1649835388556</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1649835388556</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,6 +318,7 @@
     <MESSAGE value="login" />
     <MESSAGE value="login &amp; auth" />
     <MESSAGE value="Admin auth" />
-    <option name="LAST_COMMIT_MESSAGE" value="Admin auth" />
+    <MESSAGE value="reset password1" />
+    <option name="LAST_COMMIT_MESSAGE" value="reset password1" />
   </component>
 </project>
