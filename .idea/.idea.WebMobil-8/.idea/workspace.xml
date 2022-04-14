@@ -12,9 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment=".">
-      <change afterPath="$PROJECT_DIR$/Identity101/ViewModels/UserProfileViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Identity101/Views/Account/Profile.cshtml" afterDir="false" />
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="update profile">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Controllers/AccountController.cs" afterDir="false" />
     </list>
@@ -175,7 +173,7 @@
       <workItem from="1649660374669" duration="923000" />
       <workItem from="1649661316834" duration="12114000" />
       <workItem from="1649743723906" duration="13534000" />
-      <workItem from="1649832364873" duration="8671000" />
+      <workItem from="1649832364873" duration="10759000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -296,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649840723169</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="update profile">
+      <created>1649848001103</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1649848001103</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,6 +340,7 @@
     <MESSAGE value="reset password1" />
     <MESSAGE value="password update ok" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="update profile" />
+    <option name="LAST_COMMIT_MESSAGE" value="update profile" />
   </component>
 </project>
