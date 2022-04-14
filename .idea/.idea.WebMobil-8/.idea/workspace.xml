@@ -14,10 +14,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="Aspnet Identity UI">
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity101/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Controllers/AdminController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity101/Data/MyContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity101/Data/MyContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApplication1/WebApplication1.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WebApplication1/WebApplication1.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +40,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a4ed796081acfa4cefed1c41947519a48feaf6375183bfb6abe1618b88241/SqlServerDbContextOptionsBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cd694f3ef012e6a1f1d7431ad209b6ebbef29bf93b045b2fa9638b09858ab3/IdentityBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mesutozturk/Sources/WebMobil-8/Identity101/Data/MyContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mesutozturk/Sources/WebMobil-8/Identity101/Controllers/AdminController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mesutozturk/Sources/WebMobil-8/Identity101/Data/MyContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mesutozturk/Sources/WebMobil-8/Identity101/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mesutozturk/Sources/WebMobil-8/Identity101/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
@@ -80,7 +80,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Identity101">
+  <component name="RunManager" selected=".NET Launch Settings Profile.WebApplication1">
     <configuration name="Oop101" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -220,7 +220,7 @@
       <workItem from="1649660374669" duration="923000" />
       <workItem from="1649661316834" duration="12114000" />
       <workItem from="1649743723906" duration="13534000" />
-      <workItem from="1649832364873" duration="16553000" />
+      <workItem from="1649832364873" duration="19722000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -362,7 +362,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649925834564</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary=".">
+      <created>1649932600304</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1649932600304</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -400,10 +407,10 @@
     <MESSAGE value="Admin auth" />
     <MESSAGE value="reset password1" />
     <MESSAGE value="password update ok" />
-    <MESSAGE value="." />
     <MESSAGE value="update profile" />
     <MESSAGE value="change email" />
     <MESSAGE value="Aspnet Identity UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aspnet Identity UI" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
 </project>
