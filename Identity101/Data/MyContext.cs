@@ -14,7 +14,7 @@ public sealed class MyContext : IdentityDbContext<ApplicationUser,ApplicationRol
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-
+        //Fluent API
         builder.Entity<ApplicationUser>(entity =>
         {
             entity.Property(x => x.Name).HasMaxLength(50).IsRequired(false);
