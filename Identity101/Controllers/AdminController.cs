@@ -5,17 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Identity101.Controllers;
 
-//[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
-
-    //[AllowAnonymous]
     public AdminController(UserManager<ApplicationUser> userManager)
     {
         _userManager = userManager;
     }
-
+    //[AllowAnonymous]
     public IActionResult Index()
     {
         return View();
@@ -31,7 +29,6 @@ public class AdminController : Controller
                 x.Surname,
                 x.Email
             }).ToList();
-
         return Ok(users);
     }
 }

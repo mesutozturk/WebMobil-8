@@ -219,7 +219,7 @@ public class AccountController : Controller
 
         return View();
     }
-
+    [HttpGet]
     public IActionResult ConfirmResetPassword(string userId, string code)
     {
         if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(code))
