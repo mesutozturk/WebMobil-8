@@ -65,6 +65,29 @@
                 odit, voluptatum maxime et a.
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txtUserName" placeholder="username">
+                    <label for="txtUserName">Username</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="txtEmail" placeholder="name@example.com">
+                    <label for="txtEmail">Email address</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+                    <label for="txtPassword">Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="txtConfirmPassword" placeholder="Password">
+                    <label for="txtConfirmPassword">Confirm Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="button" class="btn btn-success" id="btnKaydet" value="Register" onclick="kontrol()"> 
+                </div>
+            </div>
+        </div>
     </div>
     <style>
         /* div>div{
@@ -78,6 +101,7 @@
         <script>
             function kontrol(){
                 var password = document.getElementById("txtPassword").value;
+                console.log(password);
                 var confirmPassword = document.getElementById("txtConfirmPassword").value;
                 if(password.length < 6){
                     alert("Şifre en az 6 karakter olmalıdır.");
@@ -87,7 +111,7 @@
                     alert("Şifreler uyuşmuyor");
                     return;
                 }
-
+                //
                 alert("Kayıt işlemi başarılı");
             }
         </script>
