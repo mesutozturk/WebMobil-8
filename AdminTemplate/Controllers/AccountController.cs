@@ -12,34 +12,42 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace AdminTemplate.Controllers;
 
+
 public class AccountController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<ApplicationRole> _roleManager;
-    private readonly IEmailService _emailService;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly IEmailService _emailService;
 
-    public AccountController(UserManager<ApplicationUser> userManager, IEmailService emailService, SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager)
+
+    public AccountController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IEmailService emailService, SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
+        _roleManager = roleManager;
         _emailService = emailService;
         _signInManager = signInManager;
-        _roleManager = roleManager;
         CheckRoles();
     }
+
+
     private void CheckRoles()
     {
-        foreach (var item in Roles.RoleList)
+        foreach (string item in Roles.RoleList)
         {
             if (_roleManager.RoleExistsAsync(item).Result)
+            {
                 continue;
+            }
             var result = _roleManager.CreateAsync(new ApplicationRole()
             {
-                Name = item
+                Name = item,
             }).Result;
         }
     }
-    // GET
+
+
+    [HttpGet]
     public IActionResult Register()
     {
         return View();
@@ -54,7 +62,7 @@ public class AccountController : Controller
             return View(model);
         }
 
-        var user = new ApplicationUser
+        var user = new ApplicationUser()
         {
             UserName = model.UserName,
             Email = model.Email,
@@ -63,39 +71,39 @@ public class AccountController : Controller
         };
 
         var result = await _userManager.CreateAsync(user, model.Password);
-        if (result.Succeeded)
+
+        if (!result.Succeeded)
         {
-            //Rol Atama
-            var count = _userManager.Users.Count();
-            result = await _userManager.AddToRoleAsync(user, count == 1 ? Roles.Admin : Roles.Passive);
-
-            //Email gönderme - Aktivasyon
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
-                protocol: Request.Scheme);
-
-            var email = new MailModel()
-            {
-                To = new List<EmailModel>
-                {
-                    new EmailModel()
-                        { Adress = user.Email, Name = user.UserName }
-                },
-                Body =
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
-                Subject = "Confirm your email"
-            };
-
-            await _emailService.SendMailAsync(email);
-            //TODO: Login olma
-            return RedirectToAction("Login");
+            ModelState.AddModelError(string.Empty, "Bir hata oluştu");
+            return View(model);
         }
 
-        var messages = string.Join("<br>", result.Errors.Select(x => x.Description));
-        ModelState.AddModelError(string.Empty, messages);
-        return View(model);
+        var count = _userManager.Users.Count();
+        result = await _userManager.AddToRoleAsync(user, count == 1 ? Roles.Admin : Roles.Passive);
+
+        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Scheme);
+
+        var emailMessage = new MailModel()
+        {
+            To = new List<EmailModel> { new EmailModel()
+            {
+                Adress = user.Email,
+                Name = user.Name
+            }},
+            Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here </a>.",
+            Subject = "Confirm your email"
+        };
+
+        await _emailService.SendMailAsync(emailMessage);
+
+
+
+        return RedirectToAction("Login");
     }
+
+
     public async Task<IActionResult> ConfirmEmail(string userId, string code)
     {
         if (userId == null || code == null)
@@ -104,24 +112,22 @@ public class AccountController : Controller
         }
 
         var user = await _userManager.FindByIdAsync(userId);
-        if (user == null)
-        {
-            return NotFound($"Unable to load user with ID '{userId}'.");
-        }
+        if (user == null) return NotFound($"Unable to load user with ID ${userId}");
 
         code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
         var result = await _userManager.ConfirmEmailAsync(user, code);
-        ViewBag.StatusMessage =
-            result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+        ViewBag.StatusMessage = result.Succeeded
+            ? "Thank you for confirming your email"
+            : "Error confirming your email.";
 
-        if (result.Succeeded && _userManager.IsInRoleAsync(user, Roles.Passive).Result)
-        {
-            await _userManager.RemoveFromRoleAsync(user, Roles.Passive);
-            await _userManager.AddToRoleAsync(user, Roles.User);
-        }
+        if (!result.Succeeded || !_userManager.IsInRoleAsync(user, Roles.Passive).Result) return View();
+
+        await _userManager.RemoveFromRoleAsync(user, Roles.Passive);
+        await _userManager.AddToRoleAsync(user, Roles.User);
 
         return View();
     }
+
 
     [HttpGet]
     public IActionResult Login()
@@ -139,22 +145,30 @@ public class AccountController : Controller
 
         var user = await _userManager.FindByNameAsync(model.UserName);
 
+        if (user == null)
+        {
+            ModelState.AddModelError(string.Empty, "User not found");
+            return View(model);
+        }
+
         var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, true);
 
         if (result.Succeeded)
         {
-            return RedirectToAction("Index", "Home");
+            HttpContext.Session.SetString("User", System.Text.Json.JsonSerializer.Serialize<ApplicationUser>(user));
+
+            return RedirectToAction("Profile", "Account");
         }
         else if (result.IsLockedOut)
         {
-            //TODO: Kilitlenmişse ne yapılacağı
+
         }
         else if (result.RequiresTwoFactor)
         {
-            //TODO: 2fa yönlendirmesi yapılacak
+
         }
 
-        ModelState.AddModelError(string.Empty, "Kullanıcı adı veya şifre hatalı");
+        ModelState.AddModelError(string.Empty, "Username or password is incorrect");
         return View(model);
     }
 
@@ -180,37 +194,31 @@ public class AccountController : Controller
     public async Task<IActionResult> ResetPassword(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
-
-        if (user == null)
-        {
-            ViewBag.Message = "Mailinize Şifre güncelleme yönergemiz gönderilmiştir";
-        }
-        else
+        if (user != null)
         {
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var callbackUrl = Url.Action("ConfirmResetPassword", "Account", new { userId = user.Id, code = code },
-                protocol: Request.Scheme);
+            var callbackUrl = Url.Action("ConfirmResetPassword", "Account", new { userId = user.Id, code }, Request.Scheme);
+
 
             var emailMessage = new MailModel()
             {
-                To = new List<EmailModel>
+                To = new List<EmailModel> { new EmailModel()
                 {
-                    new EmailModel()
-                        { Adress = user.Email, Name = user.UserName }
-                },
-                Body =
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
-                Subject = "Reset Password"
+                    Adress = user.Email,
+                    Name = user.Name
+                }},
+                Body = $"You can chance your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here </a>.",
+                Subject = "Reset your password"
             };
 
             await _emailService.SendMailAsync(emailMessage);
-
-            ViewBag.Message = "Mailinize Şifre güncelleme yönergemiz gönderilmiştir";
         }
 
+        ViewBag.Message = "Eğer mail adresiniz doğru ise şifre güncelleme yönergemiz gönderilmiştir";
         return View();
     }
+
     [HttpGet]
     public IActionResult ConfirmResetPassword(string userId, string code)
     {
@@ -233,54 +241,82 @@ public class AccountController : Controller
         }
 
         var user = await _userManager.FindByIdAsync(model.UserId);
-
         if (user == null)
         {
             ModelState.AddModelError(string.Empty, "Kullanıcı bulunamadı");
-            return View();
+            return View(model);
         }
 
         var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(model.Code));
+
         var result = await _userManager.ResetPasswordAsync(user, code, model.NewPassword);
 
         if (result.Succeeded)
         {
-            //email gönder
+            var emailMessage = new MailModel()
+            {
+                To = new List<EmailModel> { new EmailModel()
+                {
+                    Adress = user.Email,
+                    Name = user.Name
+                }},
+                Body = $"Your password has changed. You can login by <a href='{Url.Action("Login", "Account")}'>here</a>",
+                Subject = "Your password changed successfully"
+            };
+            await _emailService.SendMailAsync(emailMessage);
             TempData["Message"] = "Şifre değişikliğiniz gerçekleştirilmiştir";
-            return View();
+            return RedirectToAction("Login");
         }
+
 
         var message = string.Join("<br>", result.Errors.Select(x => x.Description));
         TempData["Message"] = message;
-        return View();
+        return RedirectToAction("Login");
+
     }
 
     [Authorize]
     [HttpGet]
     public async Task<IActionResult> Profile()
     {
-        var user = await _userManager.FindByNameAsync(HttpContext.User.Identity!.Name);
-
-        var model = new UserProfileViewModel()
+        var name = HttpContext.User.Identity.Name;
+        var user = await _userManager.FindByNameAsync(name);
+        var model = new UpdateProfilePasswordViewModel
         {
-            Email = user.Email,
-            Name = user.Name,
-            Surname = user.Surname
+            UserProfileVM = new UserProfileViewModel()
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Name = user.Name,
+                Surname = user.Surname,
+                RegisterDate = user.RegisterDate
+            }
         };
+
         return View(model);
     }
 
-    [Authorize, HttpPost]
-    public async Task<IActionResult> Profile(UserProfileViewModel model)
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> Profile(UpdateProfilePasswordViewModel model)
     {
-        if (!ModelState.IsValid)
-            return View(model);
-        var user = await _userManager.FindByNameAsync(HttpContext.User.Identity!.Name);
-        user.Name = model.Name;
-        user.Surname = model.Surname;
 
-        bool isAdmin = await _userManager.IsInRoleAsync(user, Roles.Admin);
-        if (!isAdmin && user.Email != model.Email)
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        var name = HttpContext.User.Identity.Name;
+        var user = await _userManager.FindByNameAsync(name);
+
+        if (user == null)
+        {
+            ModelState.AddModelError(string.Empty, "User not found!");
+            return View(model);
+        }
+
+        var isAdmin = await _userManager.IsInRoleAsync(user, Roles.Admin);
+        if (user.Email != model.UserProfileVM.Email && !isAdmin)
         {
             await _userManager.RemoveFromRoleAsync(user, Roles.User);
             await _userManager.AddToRoleAsync(user, Roles.Passive);
@@ -288,27 +324,35 @@ public class AccountController : Controller
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
-                protocol: Request.Scheme);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Scheme);
 
             var emailMessage = new MailModel()
             {
-                To = new List<EmailModel>
+                To = new List<EmailModel> { new()
                 {
-                    new() { Adress = model.Email, Name = user.Name }
-                },
-                Body =
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here </a>.",
+                    Adress = model.UserProfileVM.Email,
+                    Name = model.UserProfileVM.Name
+                }},
+                Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here </a>.",
                 Subject = "Confirm your email"
             };
+
             await _emailService.SendMailAsync(emailMessage);
         }
 
-        user.Email = model.Email;
+
+        user.Name = model.UserProfileVM.Name;
+        user.Surname = model.UserProfileVM.Surname;
+        user.Email = model.UserProfileVM.Email;
+        user.UserName = model.UserProfileVM.UserName;
+
         var result = await _userManager.UpdateAsync(user);
         if (result.Succeeded)
         {
-            ViewBag.Message = "Güncelleme başarılı";
+            ViewBag.Message = "Your profile has been updated successfully";
+            var userl = await _userManager.FindByNameAsync(user.UserName);
+            await _signInManager.SignInAsync(userl, true);
+            HttpContext.Session.SetString("User", System.Text.Json.JsonSerializer.Serialize<ApplicationUser>(user));
         }
         else
         {
@@ -318,4 +362,33 @@ public class AccountController : Controller
 
         return View(model);
     }
+
+
+    [HttpPost, Authorize]
+    public async Task<IActionResult> ChangePassword(UpdateProfilePasswordViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            TempData["PassError"] = "There has been an error.";
+            return RedirectToAction(nameof(Profile));
+        }
+
+        var name = HttpContext.User.Identity.Name;
+        var user = await _userManager.FindByNameAsync(name);
+        var result = await _userManager.ChangePasswordAsync(user, model.ChangePasswordVM.CurrentPassword, model.ChangePasswordVM.NewPassword);
+
+        if (result.Succeeded)
+        {
+            TempData["PassSuccess"] = "Your password has been changed successfully";
+        }
+        else
+        {
+            var message = string.Join("<br>", result.Errors.Select(x => x.Description));
+            TempData["PassError"] = message;
+        }
+
+
+        return RedirectToAction(nameof(Profile));
+    }
 }
+
