@@ -7,7 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Pages" />
+      <Compile Remove="Pages\**" />
+      <Content Remove="Pages\**" />
+      <EmbeddedResource Remove="Pages\**" />
+      <None Remove="Pages\**" />
+    </ItemGroup>
+
+    <ItemGroup>
         <Folder Include="wwwroot\assets" />
     </ItemGroup>
 
