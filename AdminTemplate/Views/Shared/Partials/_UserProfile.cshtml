@@ -2,16 +2,13 @@
 @using Microsoft.AspNetCore.Http;
 
 @{
-    var userString = Context.Session.GetString("User") == null ? "" : Context.Session.GetString("User");
+    var userString = Context.Session.GetString("User") ?? "";
 
     var user = new ApplicationUser();
     if (userString != "")
     {
         user = System.Text.Json.JsonSerializer.Deserialize<ApplicationUser>(userString);
     }
-    
-    
-    
 }
 
 
