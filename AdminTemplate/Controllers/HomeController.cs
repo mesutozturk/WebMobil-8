@@ -1,4 +1,5 @@
 using AdminTemplate.Data;
+using AdminTemplate.ViewModels;
 using AdminTemplate.ViewModels.Dashboard;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +21,7 @@ public class HomeController : Controller
             Count = _context.Products.Count(),
             Total = _context.Products.Sum(x=>x.UnitPrice)
         };
-
+        
         var model = new DashboardViewModels()
         {
             ProductReportViewModel = productReportViewModel
