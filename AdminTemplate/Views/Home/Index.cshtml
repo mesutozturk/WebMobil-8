@@ -1,6 +1,14 @@
-﻿@{
+﻿@model AdminTemplate.ViewModels.Dashboard.DashboardViewModels
+
+@{
 	ViewBag.Title = "Homepage";
 }
 
-<h1>İlk tema</h1>
-
+<h1>Dashboard</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <partial name="Partials/Dashboard/_ProductReportPartialView" model="Model.ProductReportViewModel"/>
+        </div>
+    </div>
+</div>
