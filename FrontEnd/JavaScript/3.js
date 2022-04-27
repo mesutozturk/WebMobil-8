@@ -13,8 +13,23 @@ var changeColor = () => {
     pickerDiv.style.color = colorRev;
 }
 var copyClipboard = () => { //arrow function
-    var pickerDiv = document.getElementById("picker-div");
-    navigator.clipboard.writeText(pickerDiv.innerHTML);
-    //alert("Kopyalandı: "+ pickerDiv.innerHTML);
+
+    Swal.fire({
+        icon: 'question',
+        title: 'Kopyalansın mı?',
+        showCancelButton: true,
+        confirmButtonText: 'Kopyala',
+        cancelButtonText: `İptal`,
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        //console.log(result);
+        if (result.isConfirmed) {
+            var pickerDiv = document.getElementById("picker-div");
+            navigator.clipboard.writeText(pickerDiv.innerHTML);
+            Swal.fire('Kopyalandı!', pickerDiv.innerHTML, 'success')
+        } else if (result.isDenied) {
+            Swal.fire('İptal', 'Kopyalama işlemi iptal edildi', 'info')
+        }
+    })
 }
 changeColor();
