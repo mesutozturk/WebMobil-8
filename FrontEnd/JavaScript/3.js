@@ -32,4 +32,19 @@ var copyClipboard = () => { //arrow function
         }
     })
 }
+
+var divMouseOver = () => { 
+    var pickerDiv = document.getElementById("picker-div");
+    
+    pickerDiv.classList.add("animate__animated");
+    pickerDiv.classList.add("animate__pulse");
+}
+
+var divMouseLeave = () => { 
+    var pickerDiv = document.getElementById("picker-div");
+    
+    pickerDiv.classList.remove("animate__animated");
+    pickerDiv.classList.remove("animate__pulse");
+}
+
 changeColor();
