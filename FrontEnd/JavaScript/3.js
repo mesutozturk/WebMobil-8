@@ -15,6 +15,6 @@ var changeColor = () => {
 var copyClipboard = () => { //arrow function
     var pickerDiv = document.getElementById("picker-div");
     navigator.clipboard.writeText(pickerDiv.innerHTML);
-    alert("Kopyalandı: "+ pickerDiv.innerHTML);
+    //alert("Kopyalandı: "+ pickerDiv.innerHTML);
 }
 changeColor();
