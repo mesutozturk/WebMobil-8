@@ -81,9 +81,9 @@ const addPlace = () => {
             place = null;
             return;
         }
-        
+
         places.push(venue);
-        
+
         console.log(places);
         const placeList = document.getElementById("place-list");
         const placeItem = document.createElement("li");
@@ -96,11 +96,11 @@ const addPlace = () => {
     }
 }
 
-const checkPlaces = (venue) => { 
-    console.log([places,venue]);
+const checkPlaces = (venue) => {
+    console.log([places, venue]);
     for (let i = 0; i < places.length; i++) {
         const item = places[i];
-        if(item.id === venue.id){
+        if (item.id === venue.id) {
             return true;
         }
     }
@@ -109,4 +109,3 @@ const checkPlaces = (venue) => {
 
 let place = null;
 let places = [];
-
