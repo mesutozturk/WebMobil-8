@@ -100,7 +100,7 @@ const checkPlaces = (venue) => {
     console.log([places,venue]);
     for (let i = 0; i < places.length; i++) {
         const item = places[i];
-        if(item.place_id === venue.place_id){
+        if(item.id === venue.id){
             return true;
         }
     }
