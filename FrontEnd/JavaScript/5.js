@@ -22,21 +22,15 @@ var showPosition = (position) => {
     });
     const card = document.getElementById("pac-card");
     const input = document.getElementById("pac-input");
-    const biasInputElement = document.getElementById("use-location-bias");
-    const strictBoundsInputElement = document.getElementById("use-strict-bounds");
     const options = {
         fields: ["formatted_address", "geometry", "name"],
         strictBounds: false,
         types: ["establishment"],
     };
 
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(card);
 
     const autocomplete = new google.maps.places.Autocomplete(input, options);
-
-    // Bind the map's bounds (viewport) property to the autocomplete object,
-    // so that the autocomplete requests use the current map bounds for the
-    // bounds option in the request.
     autocomplete.bindTo("bounds", map);
 
     const infowindow = new google.maps.InfoWindow();
@@ -56,8 +50,6 @@ var showPosition = (position) => {
         const place = autocomplete.getPlace();
         console.log(place);
         if (!place.geometry || !place.geometry.location) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
             window.alert("No details available for input: '" + place.name + "'");
             return;
         }
@@ -77,6 +69,5 @@ var showPosition = (position) => {
             place.formatted_address;
         infowindow.open(map, marker);
     });
-
 }
 
