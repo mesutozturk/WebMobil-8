@@ -12,7 +12,7 @@ var initMap = () => {
         directionsService = new google.maps.DirectionsService();
         directionsRenderer = new google.maps.DirectionsRenderer();
         navigator.geolocation.getCurrentPosition(showPosition);
-        
+
     } else {
         console.log("Geolocation is not supported by this browser.");
     }
@@ -30,6 +30,9 @@ const showPosition = (position) => {
         zoom: 18,
         mapTypeControl: false,
     });
+
+    const trafficLayer = new google.maps.TrafficLayer();
+    trafficLayer.setMap(map);
 
     directionsRenderer.setMap(map); //çiziciyi haritaya bağladık
     directionsRenderer.setPanel(document.getElementById("mapPanel"));// sonuçlar burada gösterilecek;
@@ -103,7 +106,7 @@ const addPlace = () => {
             place = null;
             return;
         }
-        
+
         places.push(venue);
 
         // console.log(places);
@@ -119,24 +122,36 @@ const addPlace = () => {
 }
 
 const getDirections = () => {
+    if (places.length == 0) return;
+
+    wayPoints = [];
+    for (let i = 0; i < places.length; i++) {
+        wayPoints.push({
+            stopover: true,
+            location: { placeId: places[i].id }
+        });
+    }
+    //console.log(wayPoints);
+
     directionsService.route({
         origin: myPosition,
-        destination: destinationPosition,
+        destination: myPosition,
         travelMode: "DRIVING",
+        waypoints: wayPoints,
+        optimizeWaypoints: true,
         drivingOptions: {
             departureTime: new Date(Date.now()),
             trafficModel: "bestguess"
         }
     }, (response, status) => {
         if (status === "OK") {
-            console.log(response);
+            //console.log(response);
             directionsRenderer.setDirections(response);
         } else {
             window.alert("Directions request failed due to " + status);
         }
     });
 };
-
 
 const checkPlaces = (venue) => {
     console.log([places, venue]);
@@ -148,4 +163,3 @@ const checkPlaces = (venue) => {
     }
     return false;
 };
-
