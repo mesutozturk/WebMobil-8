@@ -1,7 +1,15 @@
 //GeoLocation
+let place = null;
+let places = [];
+let myPosition = null;
+let destinationPosition = null;
+let directionsService = null;
+let directionsRenderer = null;
 
 var initMap = () => {
     if (navigator.geolocation) {
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer();
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         console.log("Geolocation is not supported by this browser.");
@@ -10,16 +18,20 @@ var initMap = () => {
 
 var showPosition = (position) => {
     //console.log(position);
-    var pos = {
+    myPosition = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
     };
 
     const map = new google.maps.Map(document.getElementById("map"), {
-        center: pos,
+        center: myPosition,
         zoom: 18,
         mapTypeControl: false,
     });
+
+    directionsRenderer.setMap(map); //çiziciyi haritaya bağladık
+    directionsRenderer.setPanel(document.getElementById("mapPanel"));// sonuçlar burada gösterilecek;
+
     const card = document.getElementById("pac-card");
     const input = document.getElementById("pac-input");
     const options = {
@@ -27,6 +39,7 @@ var showPosition = (position) => {
         strictBounds: false,
         types: ["establishment"],
     };
+
 
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(card);
 
@@ -48,7 +61,7 @@ var showPosition = (position) => {
         marker.setVisible(false);
 
         place = autocomplete.getPlace();
-        console.log(place);
+        // console.log(place);
         if (!place.geometry || !place.geometry.location) {
             alert("No details available for input: '" + place.name + "'");
             return;
@@ -61,6 +74,13 @@ var showPosition = (position) => {
             map.setCenter(place.geometry.location);
             map.setZoom(17);
         }
+
+        destinationPosition = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+        };
+
+        //getDirections(directionsService, directionsRenderer);
 
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
@@ -84,7 +104,7 @@ const addPlace = () => {
 
         places.push(venue);
 
-        console.log(places);
+        // console.log(places);
         const placeList = document.getElementById("place-list");
         const placeItem = document.createElement("li");
         placeList.classList.add("list-group");
@@ -95,6 +115,26 @@ const addPlace = () => {
         place = null;
     }
 }
+
+const getDirections = () => {
+    directionsService.route({
+        origin: myPosition,
+        destination: destinationPosition,
+        travelMode: "DRIVING",
+        drivingOptions: {
+            departureTime: new Date(Date.now()),
+            trafficModel: "bestguess"
+        }
+    }, (response, status) => {
+        if (status === "OK") {
+            console.log(response);
+            directionsRenderer.setDirections(response);
+        } else {
+            window.alert("Directions request failed due to " + status);
+        }
+    });
+};
+
 
 const checkPlaces = (venue) => {
     console.log([places, venue]);
@@ -107,5 +147,3 @@ const checkPlaces = (venue) => {
     return false;
 };
 
-let place = null;
-let places = [];
