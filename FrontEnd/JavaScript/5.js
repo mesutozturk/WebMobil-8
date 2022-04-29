@@ -193,7 +193,7 @@ const checkPlaces = (venue) => {
     }
     return false;
 };
-
+//https://snazzymaps.com/style/287720/modest
 const mapStyleArr = [
     {
         "featureType": "all",
