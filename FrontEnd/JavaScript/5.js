@@ -7,6 +7,18 @@ let directionsService = null;
 let directionsRenderer = null;
 let wayPoints = [];
 
+const checkLocalStorage = () => {
+    if (localStorage.getItem("places") === null) {
+        localStorage.setItem("places", JSON.stringify(places));
+    } else {
+        places = JSON.parse(localStorage.getItem("places"));
+        for (let i = 0; i < places.length; i++) {
+            let place = places[i];
+            addPlaceHtml(place);
+        }
+    }
+};
+
 var initMap = () => {
     if (navigator.geolocation) {
         directionsService = new google.maps.DirectionsService();
@@ -44,7 +56,6 @@ const showPosition = (position) => {
         strictBounds: false,
         types: ["establishment"],
     };
-
 
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(card);
 
@@ -108,17 +119,35 @@ const addPlace = () => {
         }
 
         places.push(venue);
-
+        localStorage.setItem("places", JSON.stringify(places));
         // console.log(places);
-        const placeList = document.getElementById("place-list");
-        const placeItem = document.createElement("li");
-        placeList.classList.add("list-group");
-        placeList.classList.add("list-group-flush");
-        placeItem.classList.add("list-group-item");
-        placeItem.innerHTML = `${place.name}`;
-        placeList.appendChild(placeItem);
+        addPlaceHtml(venue);
         place = null;
     }
+}
+
+const addPlaceHtml = (place) => {
+    const placeList = document.getElementById("place-list");
+    const placeItem = document.createElement("li");
+    placeList.classList.add("list-group");
+    placeList.classList.add("list-group-flush");
+    placeItem.classList.add("list-group-item");
+    placeItem.classList.add("item-silinecek");
+    placeItem.innerHTML = `${place.name}`;
+    placeList.appendChild(placeItem);
+
+    placeItem.addEventListener("click", () => {
+        placeList.removeChild(placeItem);
+        // for (let i = 0; i < places.length; i++) {
+        //     const item = places[i];
+        //     if (item.id == place.id) {
+        //         places.splice(i, 1);
+        //         break;
+        //     }
+        // }
+        places = places.filter(item => item.id !== place.id);
+        localStorage.setItem("places", JSON.stringify(places));
+    });
 }
 
 const getDirections = () => {
@@ -154,7 +183,7 @@ const getDirections = () => {
 };
 
 const checkPlaces = (venue) => {
-    console.log([places, venue]);
+    //console.log([places, venue]);
     for (let i = 0; i < places.length; i++) {
         const item = places[i];
         if (item.id === venue.id) {
