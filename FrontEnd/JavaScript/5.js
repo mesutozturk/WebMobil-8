@@ -5,18 +5,20 @@ let myPosition = null;
 let destinationPosition = null;
 let directionsService = null;
 let directionsRenderer = null;
+let wayPoints = [];
 
 var initMap = () => {
     if (navigator.geolocation) {
         directionsService = new google.maps.DirectionsService();
         directionsRenderer = new google.maps.DirectionsRenderer();
         navigator.geolocation.getCurrentPosition(showPosition);
+        
     } else {
         console.log("Geolocation is not supported by this browser.");
     }
 }
 
-var showPosition = (position) => {
+const showPosition = (position) => {
     //console.log(position);
     myPosition = {
         lat: position.coords.latitude,
@@ -101,7 +103,7 @@ const addPlace = () => {
             place = null;
             return;
         }
-
+        
         places.push(venue);
 
         // console.log(places);
