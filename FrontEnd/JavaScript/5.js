@@ -157,7 +157,7 @@ const getDirections = () => {
     wayPoints = [];
     for (let i = 0; i < places.length; i++) {
         wayPoints.push({
-            stopover: true,
+            stopover: false,
             location: { placeId: places[i].id }
         });
     }
