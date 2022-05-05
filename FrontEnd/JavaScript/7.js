@@ -29,6 +29,7 @@ const checkLocalStorage = () => {
 };
 
 const showPosition = (position) => {
+    $("#place-list-container,#pac-card").slideDown(1000);
     //console.log(position);
     myPosition = {
         lat: position.coords.latitude,
@@ -108,6 +109,7 @@ $(() => { // on page load -- document.ready
     $("#btn-ekle").on("click", addPlace);
     $("#btn-rota-olustur").on("click", getDirections);
     checkLocalStorage();
+    $("#place-list-container,#pac-card").hide();
 });
 const getDirections = () => {
     if (places.length == 0) return;
@@ -115,7 +117,7 @@ const getDirections = () => {
     wayPoints = [];
     for (let i = 0; i < places.length; i++) {
         wayPoints.push({
-            stopover: false,
+            stopover: true,
             location: { placeId: places[i].id }
         });
     }
@@ -123,7 +125,8 @@ const getDirections = () => {
 
     directionsService.route({
         origin: myPosition,
-        destination: wayPoints[wayPoints.length - 1].location,
+        //destination: wayPoints[wayPoints.length - 1].location,
+        destination: myPosition,
         travelMode: "DRIVING",
         waypoints: wayPoints,
         optimizeWaypoints: true,
@@ -135,6 +138,7 @@ const getDirections = () => {
         if (status === "OK") {
             //console.log(response);
             directionsRenderer.setDirections(response);
+            $("#myAudio")[0].play();// rota oluşturuldu. wissen iyi yolculuklar diler
         } else {
             window.alert("Directions request failed due to " + status);
         }
@@ -164,24 +168,35 @@ const addPlace = () => {
 const addPlaceHtml = (place) => {
     const placeList = $("#place-list");
     const placeItem = $("<li>"); //document.createElement("li");
+    const deleteBtn = $("<input>"); //document.createElement("input");
 
     placeList.addClass("list-group").addClass("list-group-flush");
-    placeItem.addClass("list-group-item").addClass("item-silinecek");
+    placeItem.addClass("list-group-item").addClass("item-silinecek").addClass("d-flex").addClass("justify-content-between");
+
+    deleteBtn.addClass("btn").addClass("btn-outline-danger").addClass("btn-sm");
+    deleteBtn.attr("type", "button").attr("value", "SİL");
 
     placeItem.html(`${place.name}`);
+    placeItem.append(deleteBtn);
     placeList.append(placeItem);
 
-    placeItem.on("click", () => {
-        placeItem.remove(); //place item nesnesini direk domdan kaldırır
-        // for (let i = 0; i < places.length; i++) {
-        //     const item = places[i];
-        //     if (item.id == place.id) {
-        //         places.splice(i, 1);
-        //         break;
-        //     }
-        // }
-        places = places.filter(item => item.id !== place.id);
-        localStorage.setItem("places", JSON.stringify(places));
+    deleteBtn.on("click", () => {
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: `${place.name} silinecek!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet!',
+            cancelButtonText: 'Hayır!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                placeItem.remove(); //place item nesnesini direk domdan kaldırır
+                places = places.filter(item => item.id !== place.id);
+                localStorage.setItem("places", JSON.stringify(places));
+            }
+        });
     });
 }
 
