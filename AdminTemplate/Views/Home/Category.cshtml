@@ -1,23 +1,74 @@
 ﻿@{
     ViewBag.Title = "Kategori Sayfası";
 }
-<div class="col-md-6">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Kategori Listesi</h3>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Kategori Listesi</h3>
+            </div>
+            <div class="card-body">
+                <ul id="listCategory" class="list-group d-flex justify-content-between">
+                    <li class="list-group-item">Kategori Adı - Açıklama</li>
+                </ul>
+            </div>
         </div>
-        <div class="card-body">
-            <ul id="listCategory" class="list-group d-flex justify-content-between">
-                <li class="list-group-item">Kategori Adı - Açıklama</li>
-            </ul>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Kategori Ekle</h3>
+            </div>
+            <div class="card-body">
+                <form id="formCategory">
+                    <div class="mb-3 row">
+                        <label for="txtCategoryName" class="col-sm-2 col-form-label">Kategori Adı</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtCategoryName">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtDescription" class="col-sm-2 col-form-label">Açıklama</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtDescription">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <input type="submit" value="Kaydet" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
 @section Scripts {
 <script>
     $(() => {
         GetCategories();
+        $("#formCategory").submit(e => {
+            e.preventDefault();
+            var data = {
+                "name": $("#txtCategoryName").val(),
+                "description": $("#txtDescription").val()
+            }
+            // $.ajax({}).done(callbackfunc).fail(callbackfunc);
+            //ajax post
+            console.log(data);
+            $.ajax({
+                url: "../../api/categoryapi/add",
+                method: "POST",
+                data: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).done(data => {
+                alert(data.message);
+                GetCategories();
+            }).fail(response => {
+                console.log(response);
+            });
+
+        });
     });
 
     const GetCategories = () => {
