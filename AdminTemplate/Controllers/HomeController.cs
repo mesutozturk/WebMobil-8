@@ -1,6 +1,7 @@
 using AdminTemplate.Data;
 using AdminTemplate.ViewModels;
 using AdminTemplate.ViewModels.Dashboard;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminTemplate.Controllers;
@@ -27,5 +28,10 @@ public class HomeController : Controller
             ProductReportViewModel = productReportViewModel
         };
         return View(model);
+    }
+    [HttpGet, Authorize]
+    public IActionResult Category()
+    {
+        return View();
     }
 }
