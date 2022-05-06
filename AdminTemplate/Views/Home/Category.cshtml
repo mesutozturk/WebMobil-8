@@ -7,6 +7,40 @@
             <h3 class="card-title">Kategori Listesi</h3>
         </div>
         <div class="card-body">
+            <ul id="listCategory" class="list-group d-flex justify-content-between">
+                <li class="list-group-item">Kategori Adı - Açıklama</li>
+            </ul>
         </div>
     </div>
 </div>
+
+@section Scripts {
+<script>
+    $(() => {
+        GetCategories();
+    });
+
+    const GetCategories = () => {
+        var settings = {
+            "url": "../../api/categoryapi/all",
+            "method": "GET"
+        };
+
+        $.ajax(settings).done(function(response) {
+            console.log(response);
+            addToList(response);
+        });
+    };
+    const addToList = (categories) => {
+        const ul = $("#listCategory");
+        ul.empty();
+        categories.forEach(category => {
+            const li = $("<li>");
+            li.addClass("list-group-item");
+            li.html(`${category.name} - ${category.description}`);
+            //ul.append(li);
+            li.appendTo(ul);
+        });
+    }
+</script>
+}
