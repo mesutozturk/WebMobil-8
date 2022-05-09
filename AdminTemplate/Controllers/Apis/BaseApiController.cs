@@ -7,6 +7,6 @@ namespace AdminTemplate.Controllers.Apis
     [ApiController]
     public class BaseApiController : ControllerBase
     {
-        
+
     }
 }
