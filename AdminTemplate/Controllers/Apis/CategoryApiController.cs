@@ -96,5 +96,30 @@ namespace AdminTemplate.Controllers.Apis
                 return BadRequest(new { Message = $"Bir hata oluştu: {ex.Message}" });
             }
         }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var category = _context.Categories.Find(id);
+
+                if (category == null)
+                {
+                    return NotFound(new { Message = $"{id} numaralı kategori bulunamadı" });
+                }
+                _context.Categories.Remove(category);
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    Success = true,
+                    Message = $"{category.Name} isimli kategori başarıyla silindi"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = $"Bir hata oluştu: {ex.Message}" });
+            }
+        }
     }
 }
