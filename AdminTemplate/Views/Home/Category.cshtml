@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-12" id="cardListCategory">
         <div class="card">
-            <div class="card-header d-flex justify-content-between">
+            <div class="card-header">
                 <h3 class="card-title">Kategori Listesi </h3>
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="switch">
@@ -44,90 +44,133 @@
             </div>
         </div>
     </div>
+    <div class="col-md-6">
+        <div class="card" id="cardUpdateCategory" style="display: none">
+            <div class="card-header">
+                <h3 class="card-title">Kategori Güncelle</h3>
+            </div>
+            <div class="card-body">
+                <form id="formUpdateCategory">
+                    <div class="mb-3 row">
+                        <label for="txtUpdateCategoryName" class="col-sm-2 col-form-label">Kategori Adı</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtUpdateCategoryName">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtUpdateDescription" class="col-sm-2 col-form-label">Açıklama</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtUpdateDescription">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <input type="submit" value="Güncelle" class="btn btn-primary" />
+                    </div>
+                    <input type="hidden" id="txtUpdateCategoryId" />
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 @section Scripts {
-<script>
-    $(() => {
-        GetCategories();
-        $("#switch").on("change",() => {
-                if ($("#switch").is(":checked")) {
-                    $("#cardListCategory").attr("class","col-md-6");
+    <script>
+        $(() => {
+            GetCategories();
+            $("#switch").on("change",
+                () => {
+                    if ($("#switch").is(":checked")) {
+                        $("#cardListCategory").attr("class", "col-md-6");
 
+                        $("#formCategory").trigger("reset");
+                        $("#cardAddCategory").slideDown(750);
+                    } else {
+                        $("#cardAddCategory").slideUp(750,
+                            () => {
+                                $("#cardListCategory").attr("class", "col-md-12");
+                            });
+                    }
+                });
+            $("#formCategory").submit(e => {
+                e.preventDefault();
+                var data = {
+                    "name": $("#txtCategoryName").val(),
+                    "description": $("#txtDescription").val()
+                }
+                // $.ajax({}).done(callbackfunc).fail(callbackfunc);
+                //ajax post
+                //console.log(data);
+                $.ajax({
+                    url: "../../api/categoryapi/add",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).done(data => {
+                    //alert(data.message);
+                    toastr["success"]("Kategori Ekleme", data.message);
                     $("#formCategory").trigger("reset");
-                    $("#cardAddCategory").slideDown(750);
-                } else {
-                    $("#cardAddCategory").slideUp(750, () => {
-                        $("#cardListCategory").attr("class","col-md-12");
-                    });
-                }
-            });
-        $("#formCategory").submit(e => {
-            e.preventDefault();
-            var data = {
-                "name": $("#txtCategoryName").val(),
-                "description": $("#txtDescription").val()
-            }
-            // $.ajax({}).done(callbackfunc).fail(callbackfunc);
-            //ajax post
-            console.log(data);
-            $.ajax({
-                url: "../../api/categoryapi/add",
-                method: "POST",
-                data: JSON.stringify(data),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }).done(data => {
-                //alert(data.message);
-                toastr["success"]("Kategori Ekleme", data.message);
-                $("#formCategory").trigger("reset");
-                GetCategories();
-                $("#txtCategoryName").focus();
-            }).fail(response => {
-                toastr["error"]("Kategori Ekleme", response.responseJSON.message);
-            });
+                    GetCategories();
+                    $("#txtCategoryName").focus();
+                }).fail(response => {
+                    toastr["error"]("Kategori Ekleme", response.responseJSON.message);
+                });
 
+            });
         });
-    });
 
-    const GetCategories = () => {
-        var settings = {
-            "url": "../../api/categoryapi/all",
-            "method": "GET"
+        const GetCategories = () => {
+            var settings = {
+                "url": "../../api/categoryapi/all",
+                "method": "GET"
+            };
+
+            $.ajax(settings).done(function(response) {
+                //console.log(response);
+                addToList(response);
+            });
         };
+        const addToList = (categories) => {
+            const ul = $("#listCategory");
+            ul.empty();
+            categories.forEach(category => {
+                const li = $("<li>");
+                li.addClass("list-group-item");
+                li.html(`${category.name} - ${category.description}`);
+                //ul.append(li);
+                li.appendTo(ul);
 
-        $.ajax(settings).done(function(response) {
-            console.log(response);
-            addToList(response);
-        });
-    };
-    const addToList = (categories) => {
-        const ul = $("#listCategory");
-        ul.empty();
-        categories.forEach(category => {
-            const li = $("<li>");
-            li.addClass("list-group-item");
-            li.html(`${category.name} - ${category.description}`);
-            //ul.append(li);
-            li.appendTo(ul);
-        });
-    }
-    toastr.options = {
-        "closeButton": false,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": false,
-        "positionClass": "toast-top-right",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
-</script>
+                const div = $("<div>");
+                div.css("float", "right");
+                const btnUpdate = $(`<input type='button' value='Güncelle' class='btn btn-primary' data-id='${category.id}' />`);
+
+                btnUpdate.on("click",
+                    () => {
+                        const id = $(btnUpdate).attr("data-id");
+                        //apiden kategori detayını çek
+                        
+                    });
+
+                div.append(btnUpdate).appendTo(li);
+
+            });
+        }
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
 }
