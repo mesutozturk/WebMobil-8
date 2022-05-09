@@ -157,7 +157,7 @@ public class AccountController : Controller
                 user.Surname,
                 user.Email
             }));
-            
+
             //model.ReturnUrl = string.IsNullOrEmpty(model.ReturnUrl) ? "~/" : model.ReturnUrl;
 
             //model.ReturnUrl = model.ReturnUrl ?? Url.Action("Index", "Home");

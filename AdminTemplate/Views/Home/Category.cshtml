@@ -2,7 +2,7 @@
     ViewBag.Title = "Kategori Sayfası";
 }
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12" id="cardListCategory">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h3 class="card-title">Kategori Listesi </h3>
@@ -51,10 +51,14 @@
         GetCategories();
         $("#switch").on("change",() => {
                 if ($("#switch").is(":checked")) {
+                    $("#cardListCategory").attr("class","col-md-6");
+
                     $("#formCategory").trigger("reset");
                     $("#cardAddCategory").slideDown(750);
                 } else {
-                    $("#cardAddCategory").slideUp(750);
+                    $("#cardAddCategory").slideUp(750, () => {
+                        $("#cardListCategory").attr("class","col-md-12");
+                    });
                 }
             });
         $("#formCategory").submit(e => {
@@ -74,13 +78,13 @@
                     "Content-Type": "application/json"
                 }
             }).done(data => {
-                alert(data.message);
-                //toastr kullanarak bilgilendirelim
+                //alert(data.message);
+                toastr["success"]("Kategori Ekleme", data.message);
                 $("#formCategory").trigger("reset");
                 GetCategories();
+                $("#txtCategoryName").focus();
             }).fail(response => {
-                //toastr kullanarak bilgilendirelim
-                console.log(response);
+                toastr["error"]("Kategori Ekleme", response.responseJSON.message);
             });
 
         });
@@ -107,6 +111,23 @@
             //ul.append(li);
             li.appendTo(ul);
         });
+    }
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
     }
 </script>
 }
