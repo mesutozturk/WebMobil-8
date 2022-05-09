@@ -67,5 +67,34 @@ namespace AdminTemplate.Controllers.Apis
                 return BadRequest(new { Message = $"Bir hata oluştu: {ex.Message}" });
             }
         }
+
+        [HttpPut]
+        public IActionResult Update(int id, Category model)
+        {
+            try
+            {
+                var category = _context.Categories.Find(id);
+
+                if (category == null)
+                {
+                    return NotFound(new { Message = $"{id} numaralı kategori bulunamadı" });
+                }
+
+                category.Name = model.Name;
+                category.Description = model.Description;
+                category.UpdatedUser = HttpContext.User.Identity!.Name;
+                category.UpdatedDate = DateTime.UtcNow;
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    Success = true,
+                    Message = $"{category.Name} isimli kategori başarıyla güncellendi"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = $"Bir hata oluştu: {ex.Message}" });
+            }
+        }
     }
 }

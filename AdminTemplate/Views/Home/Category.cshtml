@@ -18,8 +18,8 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card" id="cardAddCategory" style="display: none">
+    <div class="col-md-6" id="cardAddCategory" style="display: none">
+        <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Kategori Ekle</h3>
             </div>
@@ -44,8 +44,8 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card" id="cardUpdateCategory" style="display: none">
+    <div class="col-md-6" id="cardUpdateCategory" style="display: none">
+        <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Kategori Güncelle</h3>
             </div>
@@ -117,74 +117,101 @@
             });
 
         });
+
+        $("#formUpdateCategory").submit(e => {
+            e.preventDefault();
+            var data = {
+                name: $("#txtUpdateCategoryName").val(),
+                description: $("#txtUpdateDescription").val(),
+                id: $("#txtUpdateCategoryId").val()
+            };
+
+            $.ajax({
+                url: "../../api/categoryapi/update/" + data.id,
+                method: "PUT",
+                data: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).done(data => {
+                toastr["success"]("Kategori Ekleme", data.message);
+                GetCategories();
+                $("#cardUpdateCategory").slideUp(750);
+                $("#formUpdateCategory").trigger("reset");
+                $("#cardListCategory").attr("class", "col-md-12");
+            }).fail(error => {
+                toastr["error"]("Kategori Ekleme", error.responseJSON.message);
+            });
+        });
     });
+        const GetCategories = () => {
+            var settings = {
+                "url": "../../api/categoryapi/all",
+                "method": "GET"
+            };
 
-    const GetCategories = () => {
-        var settings = {
-            "url": "../../api/categoryapi/all",
-            "method": "GET"
+            $.ajax(settings).done(function(response) {
+                //console.log(response);
+                addToList(response);
+            });
         };
+        const addToList = (categories) => {
+            const ul = $("#listCategory");
+            ul.empty();
+            categories.forEach(category => {
+                const li = $("<li>");
+                li.addClass("list-group-item");
+                li.html(`${category.name} - ${category.description}`);
+                //ul.append(li);
+                li.appendTo(ul);
 
-        $.ajax(settings).done(function(response) {
-            //console.log(response);
-            addToList(response);
-        });
-    };
-    const addToList = (categories) => {
-        const ul = $("#listCategory");
-        ul.empty();
-        categories.forEach(category => {
-            const li = $("<li>");
-            li.addClass("list-group-item");
-            li.html(`${category.name} - ${category.description}`);
-            //ul.append(li);
-            li.appendTo(ul);
+                const div = $("<div>");
+                div.css("float", "right");
+                const btnUpdate = $(`<input type='button' value='Güncelle' class='btn btn-primary' data-id='${category.id}' />`);
 
-            const div = $("<div>");
-            div.css("float", "right");
-            const btnUpdate = $(`<input type='button' value='Güncelle' class='btn btn-primary' data-id='${category.id}' />`);
+                btnUpdate.on("click",
+                    () => {
+                        const id = $(btnUpdate).attr("data-id");
+                        //apiden kategori detayını çek
+                        //api/categoryapi/detail/${id}
+                        $.ajax({
+                            url: `../../api/categoryapi/detail/${id}`,
+                            method: "GET"
+                        }).done((response) => {
+                            console.log(response);
+                            $("#txtUpdateCategoryName").val(response.name);
+                            $("#txtUpdateDescription").val(response.description);
+                            $("#txtUpdateCategoryId").val(response.id);
+                            $("#cardUpdateCategory").slideDown(750);
+                            $("#cardListCategory").attr("class", "col-md-6");
 
-            btnUpdate.on("click",
-                () => {
-                    const id = $(btnUpdate).attr("data-id");
-                    //apiden kategori detayını çek
-                    //api/categoryapi/detail/${id}
-                    $.ajax({
-                        url: `../../api/categoryapi/detail/${id}`,
-                        method: "GET"
-                    }).done((response) => {
-                        console.log(response);
-                        $("#txtUpdateCategoryName").val(response.name);
-                        $("#txtUpdateDescription").val(response.description);
-                        $("#txtUpdateCategoryId").val(response.id);
-                        $("#cardUpdateCategory").slideDown(750);
-                        $("#cardListCategory").attr("class", "col-md-6");
-                        
-                    }).fail((error) => {
-                        console.log(error.responseJSON.message);
+                        }).fail((error) => {
+                            console.log(error.responseJSON.message);
+                        });
                     });
-                });
 
-            div.append(btnUpdate).appendTo(li);
+                div.append(btnUpdate).appendTo(li);
 
-        });
-    }
-    toastr.options = {
-        "closeButton": false,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": false,
-        "positionClass": "toast-top-right",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
+            });
+        }
+
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
 </script>
-}
+    }
