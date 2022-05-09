@@ -73,104 +73,118 @@
     </div>
 </div>
 @section Scripts {
-    <script>
-        $(() => {
-            GetCategories();
-            $("#switch").on("change",
-                () => {
-                    if ($("#switch").is(":checked")) {
-                        $("#cardListCategory").attr("class", "col-md-6");
+<script>
+    $(() => {
+        GetCategories();
+        $("#switch").on("change",
+            () => {
+                if ($("#switch").is(":checked")) {
+                    $("#cardListCategory").attr("class", "col-md-6");
 
-                        $("#formCategory").trigger("reset");
-                        $("#cardAddCategory").slideDown(750);
-                    } else {
-                        $("#cardAddCategory").slideUp(750,
-                            () => {
-                                $("#cardListCategory").attr("class", "col-md-12");
-                            });
-                    }
-                });
-            $("#formCategory").submit(e => {
-                e.preventDefault();
-                var data = {
-                    "name": $("#txtCategoryName").val(),
-                    "description": $("#txtDescription").val()
-                }
-                // $.ajax({}).done(callbackfunc).fail(callbackfunc);
-                //ajax post
-                //console.log(data);
-                $.ajax({
-                    url: "../../api/categoryapi/add",
-                    method: "POST",
-                    data: JSON.stringify(data),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }).done(data => {
-                    //alert(data.message);
-                    toastr["success"]("Kategori Ekleme", data.message);
                     $("#formCategory").trigger("reset");
-                    GetCategories();
-                    $("#txtCategoryName").focus();
-                }).fail(response => {
-                    toastr["error"]("Kategori Ekleme", response.responseJSON.message);
+                    $("#cardAddCategory").slideDown(750);
+                } else {
+                    $("#cardAddCategory").slideUp(750,
+                        () => {
+                            $("#cardListCategory").attr("class", "col-md-12");
+                        });
+                }
+            });
+        $("#formCategory").submit(e => {
+            e.preventDefault();
+            var data = {
+                "name": $("#txtCategoryName").val(),
+                "description": $("#txtDescription").val()
+            }
+            // $.ajax({}).done(callbackfunc).fail(callbackfunc);
+            //ajax post
+            //console.log(data);
+            $.ajax({
+                url: "../../api/categoryapi/add",
+                method: "POST",
+                data: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).done(data => {
+                //alert(data.message);
+                toastr["success"]("Kategori Ekleme", data.message);
+                $("#formCategory").trigger("reset");
+                GetCategories();
+                $("#txtCategoryName").focus();
+            }).fail(response => {
+                toastr["error"]("Kategori Ekleme", response.responseJSON.message);
+            });
+
+        });
+    });
+
+    const GetCategories = () => {
+        var settings = {
+            "url": "../../api/categoryapi/all",
+            "method": "GET"
+        };
+
+        $.ajax(settings).done(function(response) {
+            //console.log(response);
+            addToList(response);
+        });
+    };
+    const addToList = (categories) => {
+        const ul = $("#listCategory");
+        ul.empty();
+        categories.forEach(category => {
+            const li = $("<li>");
+            li.addClass("list-group-item");
+            li.html(`${category.name} - ${category.description}`);
+            //ul.append(li);
+            li.appendTo(ul);
+
+            const div = $("<div>");
+            div.css("float", "right");
+            const btnUpdate = $(`<input type='button' value='Güncelle' class='btn btn-primary' data-id='${category.id}' />`);
+
+            btnUpdate.on("click",
+                () => {
+                    const id = $(btnUpdate).attr("data-id");
+                    //apiden kategori detayını çek
+                    //api/categoryapi/detail/${id}
+                    $.ajax({
+                        url: `../../api/categoryapi/detail/${id}`,
+                        method: "GET"
+                    }).done((response) => {
+                        console.log(response);
+                        $("#txtUpdateCategoryName").val(response.name);
+                        $("#txtUpdateDescription").val(response.description);
+                        $("#txtUpdateCategoryId").val(response.id);
+                        $("#cardUpdateCategory").slideDown(750);
+                        $("#cardListCategory").attr("class", "col-md-6");
+                        
+                    }).fail((error) => {
+                        console.log(error.responseJSON.message);
+                    });
                 });
 
-            });
+            div.append(btnUpdate).appendTo(li);
+
         });
-
-        const GetCategories = () => {
-            var settings = {
-                "url": "../../api/categoryapi/all",
-                "method": "GET"
-            };
-
-            $.ajax(settings).done(function(response) {
-                //console.log(response);
-                addToList(response);
-            });
-        };
-        const addToList = (categories) => {
-            const ul = $("#listCategory");
-            ul.empty();
-            categories.forEach(category => {
-                const li = $("<li>");
-                li.addClass("list-group-item");
-                li.html(`${category.name} - ${category.description}`);
-                //ul.append(li);
-                li.appendTo(ul);
-
-                const div = $("<div>");
-                div.css("float", "right");
-                const btnUpdate = $(`<input type='button' value='Güncelle' class='btn btn-primary' data-id='${category.id}' />`);
-
-                btnUpdate.on("click",
-                    () => {
-                        const id = $(btnUpdate).attr("data-id");
-                        //apiden kategori detayını çek
-                        
-                    });
-
-                div.append(btnUpdate).appendTo(li);
-
-            });
-        }
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-    </script>
+    }
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
 }

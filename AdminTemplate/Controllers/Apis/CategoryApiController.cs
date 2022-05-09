@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AdminTemplate.Controllers.Apis
 {
-    [Route("api/[controller]/[action]")]
+    //[Route("api/[controller]/[action]/{id?}")]
     [ApiController]
-    public class CategoryApiController : ControllerBase
+    public class CategoryApiController : BaseApiController
     {
         private readonly MyContext _context;
 
@@ -42,12 +42,25 @@ namespace AdminTemplate.Controllers.Apis
             {
                 model.CreatedUser = HttpContext.User.Identity!.Name;
                 _context.Categories.Add(model);
-                 _context.SaveChanges();
+                _context.SaveChanges();
                 return Ok(new
                 {
                     Success = true,
                     Message = $"{model.Name} isimli kategori başarıyla eklendi"
                 });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = $"Bir hata oluştu: {ex.Message}" });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Detail(int id = 0)
+        {
+            try
+            {
+                return Ok(_context.Categories.Find(id));
             }
             catch (Exception ex)
             {
