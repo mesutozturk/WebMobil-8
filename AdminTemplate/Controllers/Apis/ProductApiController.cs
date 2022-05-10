@@ -22,7 +22,7 @@ namespace AdminTemplate.Controllers.Apis
             return Ok(products);
         }
         
-        [HttpGet("{id:Guid}")]
+        [HttpGet]
         public IActionResult Detail(Guid id)
         {
             var product = _context.Products.Find(id);
@@ -34,6 +34,7 @@ namespace AdminTemplate.Controllers.Apis
         {
             try
             {
+                model.CreatedUser = HttpContext.User.Identity!.Name;
                 _context.Products.Add(model);
                 _context.SaveChanges();
                 return Ok(new
@@ -52,7 +53,7 @@ namespace AdminTemplate.Controllers.Apis
             }
         }
 
-        [HttpPut("{id:Guid}")]
+        [HttpPut]
         public IActionResult Update(Guid id, Product model)
         {
             try
@@ -62,7 +63,8 @@ namespace AdminTemplate.Controllers.Apis
                 {
                     return NotFound(new { Success = false, Message = "Ürün bulunamadı" });
                 }
-
+                model.UpdatedUser = HttpContext.User.Identity!.Name;
+                model.UpdatedDate = DateTime.UtcNow;
                 product.Name = model.Name;
                 product.UnitPrice = model.UnitPrice;
                 product.CategoryId = model.CategoryId;
@@ -83,7 +85,7 @@ namespace AdminTemplate.Controllers.Apis
             }
         }
 
-        [HttpDelete("{id:Guid}")]
+        [HttpDelete]
         public IActionResult Delete(Guid id)
         {
             try
