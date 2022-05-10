@@ -16,14 +16,14 @@ namespace AdminTemplate.Controllers.Apis
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult All()
         {
             var products = _context.Products.ToList();
             return Ok(products);
         }
-
-        [HttpGet("{id:int}")]
-        public IActionResult Get(int id)
+        
+        [HttpGet("{id:Guid}")]
+        public IActionResult Detail(Guid id)
         {
             var product = _context.Products.Find(id);
             return Ok(product);
@@ -52,8 +52,8 @@ namespace AdminTemplate.Controllers.Apis
             }
         }
 
-        [HttpPut("{id:int}")]
-        public IActionResult Update(int id, Product model)
+        [HttpPut("{id:Guid}")]
+        public IActionResult Update(Guid id, Product model)
         {
             try
             {
@@ -83,8 +83,8 @@ namespace AdminTemplate.Controllers.Apis
             }
         }
 
-        [HttpDelete("{id:int}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id:Guid}")]
+        public IActionResult Delete(Guid id)
         {
             try
             {
