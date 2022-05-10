@@ -57,6 +57,7 @@
 @section Scripts {
 <script>
     $(()=>{
+        getProducts();
         $("#switch").on("change", ()=>{
             console.log("değişti")
             if ($("#switch").is(":checked")) {
@@ -66,11 +67,12 @@
                 $("#cardAddProduct").slideDown(750);
             }
             else{
-
+                $("#cardAddProduct").slideUp(750, ()=> {
+                    $("#cardListProduct").attr("class", "col-md-12");
+                });
             }
 
         });
-        
         $("#formProduct").on("submit", (e)=>{
             e.preventDefault();
             var data = {
@@ -87,11 +89,24 @@
                 }
             }).done(data => {
                 console.log(data);
+                getProducts();
             }).fail(error => {
                 console.log(error);
             });
         })
     });
+
+    const getProducts = () => {
+        $.ajax({
+            url:"../../api/productapi/all",
+            method: "GET"
+        }).done(data => {
+            console.log(data);
+            addProductList(data);
+        }).fail(error => {
+            console.log(error);
+        });
+    }
 
     const getCategoryLookup = () => {
         $.ajax({
@@ -109,6 +124,13 @@
         $("#cmbCategory").empty();
         categories.forEach(category => {
             $("#cmbCategory").append(`<option value="${category.id}">${category.name}</option>`);
+        });
+    };
+
+    const addProductList = (products) => {
+        $("#listProduct").empty();
+        products.forEach(product => {
+            $("#listProduct").append(`<li class="list-group-item">${product.name} - ${product.unitPrice} - ${product.category.name}</li>`);
         });
     };
 </script>
