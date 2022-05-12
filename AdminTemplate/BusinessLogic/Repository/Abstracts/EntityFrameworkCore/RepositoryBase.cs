@@ -10,7 +10,7 @@ namespace AdminTemplate.BusinessLogic.Repository.Abstracts.EntityFrameworkCore
         where TEntity : BaseEntity<TKey>
     {
         protected readonly MyContext _context;
-        protected DbSet<TEntity> _table;
+        protected readonly DbSet<TEntity> _table;
 
         protected RepositoryBase(MyContext context)
         {
@@ -44,7 +44,7 @@ namespace AdminTemplate.BusinessLogic.Repository.Abstracts.EntityFrameworkCore
 
         public virtual int Delete(TEntity entity, bool isSaveLater = false)
         {
-            _table.Update(entity);
+            _table.Remove(entity);
             if (!isSaveLater)
                 return this.Save();
             return 0;
