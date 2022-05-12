@@ -3,7 +3,6 @@ using AdminTemplate.Dtos;
 using AdminTemplate.Models.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace AdminTemplate.Controllers.Apis
 {
