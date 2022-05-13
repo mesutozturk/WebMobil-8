@@ -12,7 +12,7 @@ namespace AdminTemplate.BusinessLogic.Repository.Abstracts.MongoDb
             throw new NotImplementedException();
         }
 
-        public TEntity GetById(TKey id)
+        public ValueTask<TEntity?> GetById(TKey id)
         {
             throw new NotImplementedException();
         }

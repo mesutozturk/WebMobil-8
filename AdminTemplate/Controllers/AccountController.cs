@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace AdminTemplate.Controllers;
 
-
 public class AccountController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
@@ -20,8 +19,8 @@ public class AccountController : Controller
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IEmailService _emailService;
 
-
-    public AccountController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IEmailService emailService, SignInManager<ApplicationUser> signInManager)
+    public AccountController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,
+        IEmailService emailService, SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
         _roleManager = roleManager;
@@ -38,6 +37,7 @@ public class AccountController : Controller
             {
                 continue;
             }
+
             var result = _roleManager.CreateAsync(new ApplicationRole()
             {
                 Name = item,
@@ -82,21 +82,25 @@ public class AccountController : Controller
 
         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Scheme);
+        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
+            protocol: Request.Scheme);
 
         var emailMessage = new MailModel()
         {
-            To = new List<EmailModel> { new EmailModel()
+            To = new List<EmailModel>
             {
-                Adress = user.Email,
-                Name = user.Name
-            }},
-            Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here </a>.",
+                new EmailModel()
+                {
+                    Adress = user.Email,
+                    Name = user.Name
+                }
+            },
+            Body =
+                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here </a>.",
             Subject = "Confirm your email"
         };
 
         await _emailService.SendMailAsync(emailMessage);
-
 
 
         return RedirectToAction("Login");
@@ -163,16 +167,14 @@ public class AccountController : Controller
             //model.ReturnUrl = model.ReturnUrl ?? Url.Action("Index", "Home");
 
             model.ReturnUrl ??= Url.Content("~/");
-            
+
             return LocalRedirect(model.ReturnUrl);
         }
         else if (result.IsLockedOut)
         {
-
         }
         else if (result.RequiresTwoFactor)
         {
-
         }
 
         ModelState.AddModelError(string.Empty, "Username or password is incorrect");
@@ -205,17 +207,22 @@ public class AccountController : Controller
         {
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var callbackUrl = Url.Action("ConfirmResetPassword", "Account", new { userId = user.Id, code }, Request.Scheme);
+            var callbackUrl = Url.Action("ConfirmResetPassword", "Account", new { userId = user.Id, code },
+                Request.Scheme);
 
 
             var emailMessage = new MailModel()
             {
-                To = new List<EmailModel> { new EmailModel()
+                To = new List<EmailModel>
                 {
-                    Adress = user.Email,
-                    Name = user.Name
-                }},
-                Body = $"You can chance your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here </a>.",
+                    new EmailModel()
+                    {
+                        Adress = user.Email,
+                        Name = user.Name
+                    }
+                },
+                Body =
+                    $"You can chance your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here </a>.",
                 Subject = "Reset your password"
             };
 
@@ -262,12 +269,16 @@ public class AccountController : Controller
         {
             var emailMessage = new MailModel()
             {
-                To = new List<EmailModel> { new EmailModel()
+                To = new List<EmailModel>
                 {
-                    Adress = user.Email,
-                    Name = user.Name
-                }},
-                Body = $"Your password has changed. You can login by <a href='{Url.Action("Login", "Account")}'>here</a>",
+                    new EmailModel()
+                    {
+                        Adress = user.Email,
+                        Name = user.Name
+                    }
+                },
+                Body =
+                    $"Your password has changed. You can login by <a href='{Url.Action("Login", "Account")}'>here</a>",
                 Subject = "Your password changed successfully"
             };
             await _emailService.SendMailAsync(emailMessage);
@@ -275,11 +286,9 @@ public class AccountController : Controller
             return RedirectToAction("Login");
         }
 
-
         var message = string.Join("<br>", result.Errors.Select(x => x.Description));
         TempData["Message"] = message;
         return RedirectToAction("Login");
-
     }
 
     [Authorize]
@@ -307,7 +316,6 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Profile(UpdateProfilePasswordViewModel model)
     {
-
         if (!ModelState.IsValid)
         {
             return View(model);
@@ -331,16 +339,21 @@ public class AccountController : Controller
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Scheme);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
+                protocol: Request.Scheme);
 
             var emailMessage = new MailModel()
             {
-                To = new List<EmailModel> { new()
+                To = new List<EmailModel>
                 {
-                    Adress = model.UserProfileVM.Email,
-                    Name = model.UserProfileVM.Name
-                }},
-                Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here </a>.",
+                    new()
+                    {
+                        Adress = model.UserProfileVM.Email,
+                        Name = model.UserProfileVM.Name
+                    }
+                },
+                Body =
+                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here </a>.",
                 Subject = "Confirm your email"
             };
 
@@ -387,7 +400,8 @@ public class AccountController : Controller
 
         var name = HttpContext.User.Identity.Name;
         var user = await _userManager.FindByNameAsync(name);
-        var result = await _userManager.ChangePasswordAsync(user, model.ChangePasswordVM.CurrentPassword, model.ChangePasswordVM.NewPassword);
+        var result = await _userManager.ChangePasswordAsync(user, model.ChangePasswordVM.CurrentPassword,
+            model.ChangePasswordVM.NewPassword);
 
         if (result.Succeeded)
         {
@@ -403,4 +417,3 @@ public class AccountController : Controller
         return RedirectToAction(nameof(Profile));
     }
 }
-
