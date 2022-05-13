@@ -21,10 +21,9 @@ namespace AdminTemplate.BusinessLogic.Repository.Abstracts.EntityFrameworkCore
         {
             return predicate == null ? _table : _table.Where(predicate);
         }
-        public virtual ValueTask<TEntity?> GetById(TKey id)
+        public virtual TEntity GetById(TKey id)
         {
-            var data = _table.FindAsync(id);
-            return data;
+            return _table.Find(id);
         }
 
         public virtual TKey Insert(TEntity entity, bool isSaveLater = false)

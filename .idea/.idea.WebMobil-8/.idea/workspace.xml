@@ -17,7 +17,6 @@
       <change beforePath="$PROJECT_DIR$/AdminTemplate/BusinessLogic/Repository/Abstracts/EntityFrameworkCore/RepositoryBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AdminTemplate/BusinessLogic/Repository/Abstracts/EntityFrameworkCore/RepositoryBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AdminTemplate/BusinessLogic/Repository/Abstracts/IRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AdminTemplate/BusinessLogic/Repository/Abstracts/IRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AdminTemplate/BusinessLogic/Repository/Abstracts/MongoDb/RepositoryBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AdminTemplate/BusinessLogic/Repository/Abstracts/MongoDb/RepositoryBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AdminTemplate/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AdminTemplate/Controllers/AccountController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +34,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/Mesut/source/repos/WebMobil-8/AdminTemplate/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -46,13 +48,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.AdminTemplate">
     <configuration name="Oop101" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -233,6 +235,7 @@
       <workItem from="1652431516219" duration="108000" />
       <workItem from="1652431669287" duration="1328000" />
       <workItem from="1652433075548" duration="24000" />
+      <workItem from="1652433234773" duration="366000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -430,7 +433,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650368457765</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary=".">
+      <created>1652433289849</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1652433289849</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -473,8 +483,8 @@
     <MESSAGE value="Aspnet Identity UI" />
     <MESSAGE value="tema giydirme" />
     <MESSAGE value="partial views" />
-    <MESSAGE value="." />
     <MESSAGE value="models ok" />
-    <option name="LAST_COMMIT_MESSAGE" value="models ok" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
 </project>
