@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 var con1 = builder.Configuration.GetConnectionString("con1");
 builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(con1));
 
-
 //ServiceExtensions classýnda tanýmladýðýmýz servisleri 1 kerede aktardýk.
 builder.Services.AddServices();
 
@@ -16,7 +15,6 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation()
     {
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
-
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -48,7 +46,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
-
 
 app.MapControllerRoute(
     name: "default",
