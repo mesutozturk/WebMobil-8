@@ -2,11 +2,12 @@
 using AdminTemplate.Data;
 using AdminTemplate.Models.Entities;
 
-namespace AdminTemplate.BusinessLogic.Repository;
-
-public class ProductRepo : RepositoryBase<Product, Guid>
+namespace AdminTemplate.BusinessLogic.Repository
 {
-    public ProductRepo(MyContext context) : base(context)
+    public class ProductRepo : RepositoryBase<Product, Guid>
     {
+        public ProductRepo(MyContext context) : base(context)
+        {
+        }
     }
 }

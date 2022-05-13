@@ -4,11 +4,17 @@ using AdminTemplate.Services.Email;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using AdminTemplate.BusinessLogic.Repository;
+using AdminTemplate.BusinessLogic.Repository.Abstracts;
 using AdminTemplate.MappingProfiles;
+using AdminTemplate.Models.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 var con1 = builder.Configuration.GetConnectionString("con1");
 builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(con1));
+
+#region Identity
+
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
     {
         // Password settings.
@@ -42,7 +48,18 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+#endregion
+
 builder.Services.AddTransient<IEmailService, SmtpEmailService>();
+
+#region Repositories
+
+builder.Services.AddScoped<IRepository<Product, Guid>, ProductRepo>();
+builder.Services.AddScoped<IRepository<Category, int>, CategoryRepo>();
+
+#endregion
+
+
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation()
     .AddJsonOptions(options =>
     {
