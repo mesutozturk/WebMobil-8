@@ -14,15 +14,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="Katmanlar ve referanslar ayarlandı">
-      <change afterPath="$PROJECT_DIR$/WissenShop.Web/Controllers/HomeController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WissenShop.Web/Views/Home/Index.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WissenShop.Web/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WissenShop.Web/Views/Shared/_ViewImports.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WissenShop.Web/Views/Shared/_ViewStart.cshtml" afterDir="false" />
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="servisler eklendi">
+      <change afterPath="$PROJECT_DIR$/WissenShop.Data/Migrations/20220516081403_Init.Designer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WissenShop.Data/Migrations/20220516081403_Init.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WissenShop.Data/Migrations/MyContextModelSnapshot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WissenShop.Web/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WissenShop.Web/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WissenShop.Web/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/WissenShop.Web/Properties/launchSettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WissenShop.Web/WissenShop.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WissenShop.Web/WissenShop.Web.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +36,10 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/42794acf9c224fece37166245d579235973727b16c1931c5ccd329df39ad78/ConfigurationBinder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9abc3c6a5f60446e85dcb527c15e1a9911b78/_8632b/IServiceCollection.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -280,7 +280,7 @@
       <workItem from="1652442437051" duration="98000" />
       <workItem from="1652683252105" duration="474000" />
       <workItem from="1652683898370" duration="48000" />
-      <workItem from="1652683973325" duration="1861000" />
+      <workItem from="1652683973325" duration="5073000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -492,7 +492,21 @@
       <option name="project" value="LOCAL" />
       <updated>1652685176727</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Admintemplate projesindeki classlar uygun katmanlara taşındı">
+      <created>1652688192330</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1652688192330</updated>
+    </task>
+    <task id="LOCAL-00032" summary="servisler eklendi">
+      <created>1652688423930</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1652688423930</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,6 +552,8 @@
     <MESSAGE value="models ok" />
     <MESSAGE value="." />
     <MESSAGE value="Katmanlar ve referanslar ayarlandı" />
-    <option name="LAST_COMMIT_MESSAGE" value="Katmanlar ve referanslar ayarlandı" />
+    <MESSAGE value="Admintemplate projesindeki classlar uygun katmanlara taşındı" />
+    <MESSAGE value="servisler eklendi" />
+    <option name="LAST_COMMIT_MESSAGE" value="servisler eklendi" />
   </component>
 </project>
