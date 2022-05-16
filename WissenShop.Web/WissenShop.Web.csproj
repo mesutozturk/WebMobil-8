@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\WissenShop.Business\WissenShop.Business.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="Components" />
       <Folder Include="Models" />
       <Folder Include="wwwroot" />
@@ -22,6 +18,10 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\WissenShop.Web.Core\WissenShop.Web.Core.csproj" />
     </ItemGroup>
 
 </Project>

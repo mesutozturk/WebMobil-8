@@ -1,63 +1,12 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WissenShop.Business.MappingProfiles;
-using WissenShop.Business.Repositories;
-using WissenShop.Business.Repositories.Abstracts;
-using WissenShop.Business.Services.Email;
-using WissenShop.Core.Entities;
 using WissenShop.Data.EntityFramework;
-using WissenShop.Data.Identity;
+using WissenShop.Web.Core.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var con1 = builder.Configuration.GetConnectionString("con1");
 builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(con1));
 
-#region Identity
-
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
-    {
-        // Password settings.
-        options.Password.RequireDigit = true;
-        options.Password.RequireLowercase = false;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = false;
-        options.Password.RequiredLength = 6;
-        options.Password.RequiredUniqueChars = 1;
-
-        // Lockout settings.
-        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-        options.Lockout.MaxFailedAccessAttempts = 3;
-        options.Lockout.AllowedForNewUsers = false;
-
-        // User settings.
-        options.User.AllowedUserNameCharacters =
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._";
-        options.User.RequireUniqueEmail = true;
-    }).AddEntityFrameworkStores<MyContext>()
-    .AddDefaultTokenProviders();
-
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    // Cookie settings
-    options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-
-    options.LoginPath = "/Account/Login";
-    options.AccessDeniedPath = "/Account/AccessDenied";
-    options.SlidingExpiration = true;
-});
-
-#endregion
-
-builder.Services.AddTransient<IEmailService, SmtpEmailService>();
-
-builder.Services.AddScoped<IRepository<Product, Guid>, ProductRepo>();
-builder.Services.AddScoped<IRepository<Category, int>, CategoryRepo>();
-
-builder.Services.AddAutoMapper(options =>
-{
-    options.AddProfile<EntityMappingProfile>();
-});
+builder.Services.AddServices();
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 

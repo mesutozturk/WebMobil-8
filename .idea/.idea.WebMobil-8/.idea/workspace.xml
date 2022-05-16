@@ -14,13 +14,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="servisler eklendi">
-      <change afterPath="$PROJECT_DIR$/WissenShop.Data/Migrations/20220516081403_Init.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WissenShop.Data/Migrations/20220516081403_Init.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WissenShop.Data/Migrations/MyContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WissenShop.Web/WissenShop.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WissenShop.Web/WissenShop.Web.csproj" afterDir="false" />
-    </list>
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="migrations ok&#10;dotnet ef migrations add Init --project ../WissenShop.Data&#10;dotnet ef database update --project ../WissenShop.Data" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -280,7 +274,7 @@
       <workItem from="1652442437051" duration="98000" />
       <workItem from="1652683252105" duration="474000" />
       <workItem from="1652683898370" duration="48000" />
-      <workItem from="1652683973325" duration="5073000" />
+      <workItem from="1652683973325" duration="5649000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -506,7 +500,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652688423930</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="migrations ok&#10;dotnet ef migrations add Init --project ../WissenShop.Data&#10;dotnet ef database update --project ../WissenShop.Data">
+      <created>1652689366709</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1652689366709</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -529,7 +530,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="rider" />
     <MESSAGE value="identity giriş" />
     <MESSAGE value="Identity ok" />
     <MESSAGE value="fluent api" />
@@ -554,6 +554,7 @@
     <MESSAGE value="Katmanlar ve referanslar ayarlandı" />
     <MESSAGE value="Admintemplate projesindeki classlar uygun katmanlara taşındı" />
     <MESSAGE value="servisler eklendi" />
-    <option name="LAST_COMMIT_MESSAGE" value="servisler eklendi" />
+    <MESSAGE value="migrations ok&#10;dotnet ef migrations add Init --project ../WissenShop.Data&#10;dotnet ef database update --project ../WissenShop.Data" />
+    <option name="LAST_COMMIT_MESSAGE" value="migrations ok&#10;dotnet ef migrations add Init --project ../WissenShop.Data&#10;dotnet ef database update --project ../WissenShop.Data" />
   </component>
 </project>
