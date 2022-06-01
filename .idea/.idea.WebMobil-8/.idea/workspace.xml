@@ -9,12 +9,18 @@
     <projectFile>AdminTemplate/AdminTemplate.csproj</projectFile>
     <projectFile profileName="WissenShop.Web">WissenShop.Web/WissenShop.Web.csproj</projectFile>
     <projectFile profileName="IIS Express">WissenShop.Web/WissenShop.Web.csproj</projectFile>
+    <projectFile profileName="WissenShop.Web2">WissenShop.Web2/WissenShop.Web2.csproj</projectFile>
+    <projectFile profileName="IIS Express">WissenShop.Web2/WissenShop.Web2.csproj</projectFile>
+    <projectFile profileName="WissenShop.Web.Core">WissenShop.Web.Core/WissenShop.Web.Core.csproj</projectFile>
+    <projectFile profileName="IIS Express">WissenShop.Web.Core/WissenShop.Web.Core.csproj</projectFile>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="migrations ok&#10;dotnet ef migrations add Init --project ../WissenShop.Data&#10;dotnet ef database update --project ../WissenShop.Data" />
+    <list default="true" id="87d7b36d-f559-4757-8a79-bc5703de955c" name="Changes" comment="WissenShop.Web.Core web UI referans">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebMobil-8/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -231,8 +237,68 @@
         <option name="Build" />
       </method>
     </configuration>
+    <configuration name="WissenShop.Web2" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/WissenShop.Web2/WissenShop.Web2.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="WissenShop.Web2" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="WissenShop.Web2: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/WissenShop.Web2/WissenShop.Web2.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="IIS Express" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
     <configuration name="WissenShop.Web: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/WissenShop.Web/WissenShop.Web.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="IIS Express" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="WissenShop.Web.Core" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/WissenShop.Web.Core/WissenShop.Web.Core.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="WissenShop.Web.Core" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="WissenShop.Web.Core: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/WissenShop.Web.Core/WissenShop.Web.Core.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
       <option name="LAUNCH_PROFILE_NAME" value="IIS Express" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
@@ -274,7 +340,7 @@
       <workItem from="1652442437051" duration="98000" />
       <workItem from="1652683252105" duration="474000" />
       <workItem from="1652683898370" duration="48000" />
-      <workItem from="1652683973325" duration="5649000" />
+      <workItem from="1652683973325" duration="8821000" />
     </task>
     <task id="LOCAL-00001" summary="rider">
       <created>1649658510864</created>
@@ -507,7 +573,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652689366709</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="WissenShop.Web.Core web UI referans">
+      <created>1652692367883</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1652692367883</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,7 +603,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="identity giriş" />
     <MESSAGE value="Identity ok" />
     <MESSAGE value="fluent api" />
     <MESSAGE value="identity IoC" />
@@ -555,6 +627,7 @@
     <MESSAGE value="Admintemplate projesindeki classlar uygun katmanlara taşındı" />
     <MESSAGE value="servisler eklendi" />
     <MESSAGE value="migrations ok&#10;dotnet ef migrations add Init --project ../WissenShop.Data&#10;dotnet ef database update --project ../WissenShop.Data" />
-    <option name="LAST_COMMIT_MESSAGE" value="migrations ok&#10;dotnet ef migrations add Init --project ../WissenShop.Data&#10;dotnet ef database update --project ../WissenShop.Data" />
+    <MESSAGE value="WissenShop.Web.Core web UI referans" />
+    <option name="LAST_COMMIT_MESSAGE" value="WissenShop.Web.Core web UI referans" />
   </component>
 </project>
