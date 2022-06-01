@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace North.Web.Models
+namespace North.Core.Entities
 {
-    public partial class Supplier
+    public partial class Customer
     {
-        public Supplier()
+        public Customer()
         {
-            Products = new HashSet<Product>();
+            Orders = new HashSet<Order>();
+            CustomerTypes = new HashSet<CustomerDemographic>();
         }
 
-        public int SupplierId { get; set; }
+        public string CustomerId { get; set; } = null!;
         public string CompanyName { get; set; } = null!;
         public string? ContactName { get; set; }
         public string? ContactTitle { get; set; }
@@ -21,8 +22,9 @@ namespace North.Web.Models
         public string? Country { get; set; }
         public string? Phone { get; set; }
         public string? Fax { get; set; }
-        public string? HomePage { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+
+        public virtual ICollection<CustomerDemographic> CustomerTypes { get; set; }
     }
 }
