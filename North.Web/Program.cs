@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using North.Businesss.Repositories;
+using North.Businesss.Repositories.Abstracts;
+using North.Core.Entities;
 using North.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +11,10 @@ builder.Services.AddDbContext<NorthwindContext>(options =>
 {
     options.UseSqlServer(con1);
 });
+
+builder.Services.AddScoped<IRepository<Category,int>, CategoryRepo>();
+builder.Services.AddScoped<IRepository<Product,int>, ProductRepo>();
+builder.Services.AddScoped<IRepository<Order,int>, OrderRepo>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -4,9 +4,9 @@ using North.Data;
 
 namespace North.Businesss.Repositories
 {
-    public class CateogryRepo : RepositoryBase<Category, int>
+    public class CategoryRepo : RepositoryBase<Category, int>
     {
-        public CateogryRepo(NorthwindContext context) : base(context)
+        public CategoryRepo(NorthwindContext context) : base(context)
         {
         }
     }
