@@ -8,9 +8,77 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-<ul class="list-group-horizontal">
-    @foreach (var item in Model)
-    {
-        <li class="list-group-item">@item.ProductName - @item.UnitPrice</li>
-    }
-</ul>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <ul class="list-group">
+                @foreach (var item in Model)
+                {
+                    <li class="list-group-item d-flex justify-content-between">
+                        @item.ProductName - @item.UnitPrice
+                        <button class="btn btn-primary add-cart" data-id="@item.ProductId"><i class="fas fa-shopping-cart"></i></button>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <div id="cart">
+                <div class="row">
+                    <div class="col-4">Çay</div>
+                    <div class="col-4">2x</div>
+                    <div class="col-4">36.00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        let cart = [];
+        $(() => {
+            //$(".add-cart").on("click",
+            //    (e) => {
+
+            //        console.log($(e.target));
+            //    });
+
+            $(".add-cart").on("click", function() {
+                var id = $(this).attr("data-id");
+                $.ajax({
+                    url: "../../api/productapi/get/" + id,
+                    method: "GET"
+                }).done((response) => {
+                    console.log(response);
+                    addToCart(response);
+                    console.log(cart);
+                }).fail((response) => {
+                    console.log(response);
+                });
+            });
+        });
+        let addToCart = (product) => {
+            let isExist = false;
+            for (let i = 0; i < cart.length; i++) {
+                let data = cart[i];
+                if (data.productId === product.productId) {
+                    data.count++;
+                    isExist = true;
+                    break;
+                }
+            }
+            if (!isExist) {
+                cart.push({
+                    productId: product.productId,
+                    unitPrice: product.unitPrice,
+                    count: 1
+                });
+            }
+            displayCart();
+        }
+        let displayCart = () => {
+            $("#cart").children().empty();
+
+        }
+    </script>
+}

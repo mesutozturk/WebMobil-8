@@ -20,7 +20,7 @@ namespace North.Businesss.Repositories.Abstracts.EntityFrameworkCore
         {
             return predicate == null ? _table : _table.Where(predicate);
         }
-        public virtual TEntity GetById(TKey id)
+        public virtual TEntity? GetById(TKey id)
         {
             return _table.Find(id);
         }
