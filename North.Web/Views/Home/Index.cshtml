@@ -27,13 +27,18 @@
                 <div class="row">
                     <div class="col-4">${data.productName}</div>
                     <div class="col-4">
-                        <input type="button" class="btn btn-info btn-sm decrease" data-id="21" value="-"/> 
+                        <input type="button" class="btn btn-info btn-sm decrease" data-id="21" value="-" />
                         ${data.count} x
-                        <input type="button" class="btn btn-info btn-sm ascent" data-id="21" value="+"/> 
+                        <input type="button" class="btn btn-info btn-sm ascent" data-id="21" value="+" />
                     </div>
                     <div class="col-4">${data.count * data.unitPrice}</div>
                 </div>
-                <div class="text-black-50" id="total">Sepet Tutarı: 0 ₺</div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-black-50" id="total">Sepet Tutarı: 0 ₺</div>
+                    <a asp-controller="Payment" asp-action="Pay" class="btn btn-success" id="payment-link"> Ödeme Yap</a>
+                </div>
             </div>
         </div>
     </div>
@@ -55,13 +60,18 @@
                         url: "../../api/productapi/get/" + id,
                         method: "GET"
                     }).done((response) => {
-                        console.log(response);
+                        //console.log(response);
                         addToCart(response);
-                        console.log(cart);
+                        //console.log(cart);
                     }).fail((response) => {
                         console.log(response);
                     });
                 });
+
+            cart = JSON.parse(localStorage.getItem("cart"));
+            if (cart == null)
+                cart = [];
+            displayCart();
         });
         let addToCart = (product) => {
             let isExist = false;
@@ -89,15 +99,15 @@
             for (let i = 0; i < cart.length; i++) {
                 const data = cart[i];
                 let html = `<div class="col-3">${data.productName}</div>
-                    <div class="col-3">
-                        <input type="button" class="btn btn-info btn-sm decrease" data-id="${data.productId}" value="-"/> 
-                        ${data.count} x
-                        <input type="button" class="btn btn-info btn-sm ascent" data-id="${data.productId}" value="+"/> 
-                    </div>
-                    <div class="col-3">${data.count * data.unitPrice}</div>
-                    <div class="col-3">
-                        <input type="button" value="Sil" class="btn btn-danger removeCart" data-id="${data.productId}" />
-                    </div>`;
+                            <div class="col-3">
+                                <input type="button" class="btn btn-info btn-sm decrease" data-id="${data.productId}" value="-"/>
+                                ${data.count} x
+                                <input type="button" class="btn btn-info btn-sm ascent" data-id="${data.productId}" value="+"/>
+                            </div>
+                            <div class="col-3">${data.count * data.unitPrice}</div>
+                            <div class="col-3">
+                                <input type="button" value="Sil" class="btn btn-danger removeCart" data-id="${data.productId}" />
+                            </div>`;
 
                 $(html).appendTo($("#cart").children());
                 total += data.count * data.unitPrice;
@@ -127,6 +137,7 @@
                     });
             }
             $("#total").html(`Sepet Tutarı: ${total} ₺`);
+            localStorage.setItem("cart", JSON.stringify(cart));
         }
         let removeFromCart = (id) => {
             let product = cart.filter(x => x.productId == id)[0];
