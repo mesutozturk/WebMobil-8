@@ -11,7 +11,8 @@
                             <input class="form-control mb-3"
                                    type="text"
                                    placeholder="Name"
-                                   value="Barry Allen" />
+                                   value="Barry Allen"
+                                   id="txt-cardName"/>
                         </div>
                     </div>
                     <div class="col-12">
@@ -27,7 +28,8 @@
                             <p class="text mb-1">Expiry</p>
                             <input class="form-control mb-3"
                                    type="text"
-                                   placeholder="MM/YYYY" />
+                                   placeholder="MM/YYYY"
+                                   id="txt-expire"/>
                         </div>
                     </div>
                     <div class="col-6">
@@ -35,11 +37,12 @@
                             <p class="text mb-1">CVV/CVC</p>
                             <input class="form-control mb-3 pt-2"
                                    type="password"
-                                   placeholder="***" />
+                                   placeholder="***"
+                                   id="txt-cvc"/>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="btn btn-primary mb-3">
+                        <div class="btn btn-primary mb-3" id="make-payment">
                             <span class="ps-3" id="lbl-total"></span>
                             <span class="fas fa-arrow-right"></span>
                         </div>
@@ -102,6 +105,30 @@
                     }).done((response) => {
                         console.log(response);
                         displayInstallments(response);
+                    }).fail((response) => {
+                        console.log(response);
+                    });
+                });
+            $("#make-payment").on("click",
+                () => {
+                    const paymentModel = {
+                        cardModel: {
+                            cardHolderName: $("#txt-cardName").val(),
+                            cardNumber : $("#txt-cardNumber").val(),
+                            expireYear: 2023,
+                            expireMonth : 5,
+                            cvc: $("#txt-cvc").val()
+                        },
+                        installment : selectedInstallments,
+                        carts : cart
+                    };
+
+                    $.ajax({
+                        url: "../../odeme-yap",
+                        method: "post",
+                        data: paymentModel
+                    }).done((response) => {
+                        console.log(response);
                     }).fail((response) => {
                         console.log(response);
                     });
