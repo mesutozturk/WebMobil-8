@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-12">
                         <div class="btn btn-primary mb-3">
-                            <span class="ps-3">Pay $243</span>
+                            <span class="ps-3" id="lbl-total"></span>
                             <span class="fas fa-arrow-right"></span>
                         </div>
                     </div>
@@ -51,6 +51,18 @@
             <div class="card px-4">
                 <p class="h8 py-3">Taksitler</p>
                 <div class="row gx-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Taksit</th>
+                                <th>Toplam</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-installments">
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -61,6 +73,7 @@
     <script>
         let cart = [];
         let total = 0;
+        let selectedInstallments = 1;
         $(() => {
             cart = JSON.parse(localStorage.getItem("cart"));
             if (cart == null || cart.length == 0)
@@ -71,6 +84,8 @@
                 total += data.count * data.unitPrice;
             }
 
+            $("#lbl-total").html("Toplam Sepet Tutarı: " + total);
+
             $("#txt-cardNumber").on("blur",
                 function() {
                     const cardNumber = $(this).val();
@@ -78,24 +93,46 @@
                         return;
                     let data = {
                         cardNumber: cardNumber,
-                        price: total
+                        price: total.toString().replace('.', ',')
                     }
                     $.ajax({
                         url: "../taksit-kontrol",
                         method: "POST",
-                        data: data,
-                        dataType: "json",
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
+                        data: data
                     }).done((response) => {
                         console.log(response);
+                        displayInstallments(response);
                     }).fail((response) => {
                         console.log(response);
                     });
-
                 });
-        })
+        });
+        let displayInstallments = (data) => {
+            $("#tbl-installments").empty();
+
+            for (let i = 0; i < data.installmentPrices.length; i++) {
+                const ins = data.installmentPrices[i];
+                let row = `<tr class='select-installment ${i == 0 ? "table-success" : ""}' data-number='${ins.installmentNumber}'>
+                            <th>${ins.installmentNumber}</th>
+                            <td>${ins.price}</td>
+                            <td>${ins.totalPrice}</td>
+                        </tr>`;
+                $("#tbl-installments").append(row);
+            }
+            const select = document.querySelectorAll(".select-installment");
+            for (let i = 0; i < select.length; i++) {
+                select[i].addEventListener("click",
+                    function() {
+                        for (let j = 0; j < select.length; j++) {
+                            const ff = select[j];
+                            $(ff).removeClass("table-success");
+                        }
+                        $(select[i]).addClass("table-success");
+                        let number = $(select[i]).attr("data-number");
+                        selectedInstallments = number;
+                    });
+            }
+        };
     </script>
 }
     @section Styles
