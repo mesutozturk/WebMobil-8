@@ -1,11 +1,11 @@
-﻿using System.Globalization;
-using AutoMapper;
+﻿using AutoMapper;
 using Iyzipay;
 using Iyzipay.Model;
 using Iyzipay.Request;
 using Microsoft.Extensions.Configuration;
 using MUsefulMethods;
 using North.Core.Payments;
+using System.Globalization;
 
 namespace North.Businesss.Services.Payment
 {
@@ -66,7 +66,49 @@ namespace North.Businesss.Services.Payment
 
         public PaymentResponseModel Pay(PaymentModel model)
         {
-            throw new NotImplementedException();
+            var request = this.InitialPayPaymentRequest(model);
+            var payment = Iyzipay.Model.Payment.Create(request, _options);
+            return _mapper.Map<PaymentResponseModel>(payment);
+
+        }
+
+        private CreatePaymentRequest InitialPayPaymentRequest(PaymentModel model)
+        {
+            var checkInstallmentsResult = this.CheckInstallments(model.CardModel.CardNumber, model.Price);
+
+            var paid = checkInstallmentsResult.InstallmentPrices
+                .FirstOrDefault(x => x.InstallmentNumber == model.Installment, new InstallmentPriceModel()
+                {
+                    TotalPrice = model.Price.ToString(new CultureInfo("en-us")),
+                    InstallmentNumber = 1,
+                    Price = model.Price.ToString(new CultureInfo("en-us"))
+                });
+
+            var paymentRequest = new CreatePaymentRequest
+            {
+                Installment = model.Installment,
+                Locale = Locale.TR.ToString(),
+                ConversationId = GenerateConversationId(),
+                Price = model.Price.ToString(new CultureInfo("en-US")),
+                PaidPrice = paid.TotalPrice,
+                Currency = Currency.TRY.ToString(),
+                BasketId = StringHelpers.GenerateUniqueCode(),
+                PaymentChannel = PaymentChannel.WEB.ToString(),
+                PaymentGroup = PaymentGroup.PRODUCT.ToString(),
+                PaymentCard = _mapper.Map<PaymentCard>(model.CardModel),
+                Buyer = _mapper.Map<Buyer>(model.Customer),
+                BillingAddress = _mapper.Map<Address>(model.Address),
+                ShippingAddress = _mapper.Map<Address>(model.Address)
+            };
+            var basketItems = new List<BasketItem>();
+
+            foreach (var basketModel in model.BasketList)
+            {
+                basketItems.Add(_mapper.Map<BasketItem>(basketModel));
+            }
+            paymentRequest.BasketItems = basketItems;
+
+            return paymentRequest;
         }
     }
 }

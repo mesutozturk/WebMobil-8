@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Iyzipay.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using North.Businesss.Repositories.Abstracts;
 using North.Businesss.Services.Payment;
 using North.Core.Entities;
@@ -46,8 +47,10 @@ namespace North.Web.Controllers
             var total = 0m;
             foreach (var item in model.Carts)
             {
-                var found = _productRepo.GetById(item.ProductId);
-                if (found != null)
+                var found = _productRepo.Get(x=>x.ProductId == item.ProductId)
+                    .Include(x=>x.Category)
+                    .FirstOrDefault();
+                if (found is { Discontinued: false }) //if(found != null && !found.Discontinued)
                 {
                     basketModel.Add(new BasketModel()
                     {
@@ -55,22 +58,12 @@ namespace North.Web.Controllers
                         Category1 = found.Category?.CategoryName,
                         Id = found.ProductId.ToString(),
                         ItemType = "PHYSICAL",  //"VIRTUAL" "PHYSICAL",
-                        Price = found.UnitPrice?.ToString(new CultureInfo("en-us")),
+                        Price =  (found.UnitPrice*item.Count)?.ToString(new CultureInfo("en-us")),
                     });
                     total += found.UnitPrice.GetValueOrDefault() * item.Count;
                 }
             }
-
-            var checkInstallmentsResult = _paymentService.CheckInstallments(model.CardModel.CardNumber, total);
-
-            var paid = checkInstallmentsResult.InstallmentPrices
-                .FirstOrDefault(x => x.InstallmentNumber == model.Installment, new InstallmentPriceModel()
-                {
-                    TotalPrice = total.ToString(new CultureInfo("en-us")),
-                    InstallmentNumber = 1,
-                    Price = total.ToString(new CultureInfo("en-us"))
-                });
-
+            
             var paymentModel = new PaymentModel()
             {
                 CardModel = model.CardModel,
@@ -110,8 +103,6 @@ namespace North.Web.Controllers
 
             var result = _paymentService.Pay(paymentModel);
             return Ok(result);
-
-            return Ok();
         }
     }
 }

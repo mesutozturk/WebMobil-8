@@ -19,7 +19,9 @@ namespace North.Web.Controllers
 
         public IActionResult Index()
         {
-            var model = _productRepo.Get().ToList();
+            var model = _productRepo
+                .Get()
+                .ToList();
             return View(model);
         }
 
